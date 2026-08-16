@@ -115,4 +115,4 @@ different GPU types across pods (mitigated by same-pod baselines and the
 reported noise bound).
 
 ---
-Sign-off: ____________  Freeze commit: ____________
+Sign-off: Frederik, 2026-08-17 (in chat: kept as control)  Freeze commit: c92c014
