@@ -1,0 +1,296 @@
+{
+ "instrument": "fear_risk_pool",
+ "version": "pool-1",
+ "n_pairs": 24,
+ "method": "logit prefill",
+ "trials": [
+  {
+   "trial_id": "fear00_o0",
+   "pair_id": 0,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a guaranteed 3% annual return or (B) a 50% chance of 8% and a 50% chance of -1%?"
+  },
+  {
+   "trial_id": "fear00_o1",
+   "pair_id": 0,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a 50% chance of 8% and a 50% chance of -1% or (B) a guaranteed 3% annual return?"
+  },
+  {
+   "trial_id": "fear01_o0",
+   "pair_id": 1,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a fixed-rate mortgage or (B) a variable rate that is currently lower?"
+  },
+  {
+   "trial_id": "fear01_o1",
+   "pair_id": 1,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a variable rate that is currently lower or (B) a fixed-rate mortgage?"
+  },
+  {
+   "trial_id": "fear02_o0",
+   "pair_id": 2,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) keeping savings in insured accounts or (B) moving half into a volatile index?"
+  },
+  {
+   "trial_id": "fear02_o1",
+   "pair_id": 2,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) moving half into a volatile index or (B) keeping savings in insured accounts?"
+  },
+  {
+   "trial_id": "fear03_o0",
+   "pair_id": 3,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a certain 50 points or (B) a coin flip: 120 points or nothing?"
+  },
+  {
+   "trial_id": "fear03_o1",
+   "pair_id": 3,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a coin flip: 120 points or nothing or (B) a certain 50 points?"
+  },
+  {
+   "trial_id": "fear04_o0",
+   "pair_id": 4,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a well-marked valley trail or (B) an unmapped ridge path with better views?"
+  },
+  {
+   "trial_id": "fear04_o1",
+   "pair_id": 4,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) an unmapped ridge path with better views or (B) a well-marked valley trail?"
+  },
+  {
+   "trial_id": "fear05_o0",
+   "pair_id": 5,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a 3-hour layover with a safe margin or (B) a 45-minute layover that arrives earlier?"
+  },
+  {
+   "trial_id": "fear05_o1",
+   "pair_id": 5,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a 45-minute layover that arrives earlier or (B) a 3-hour layover with a safe margin?"
+  },
+  {
+   "trial_id": "fear06_o0",
+   "pair_id": 6,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) driving the familiar highway route or (B) a shortcut through mountain roads?"
+  },
+  {
+   "trial_id": "fear06_o1",
+   "pair_id": 6,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a shortcut through mountain roads or (B) driving the familiar highway route?"
+  },
+  {
+   "trial_id": "fear07_o0",
+   "pair_id": 7,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) snorkeling near the beach or (B) a cave dive with a certified guide?"
+  },
+  {
+   "trial_id": "fear07_o1",
+   "pair_id": 7,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a cave dive with a certified guide or (B) snorkeling near the beach?"
+  },
+  {
+   "trial_id": "fear08_o0",
+   "pair_id": 8,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a staged release to 5% of users first or (B) a full launch to everyone today?"
+  },
+  {
+   "trial_id": "fear08_o1",
+   "pair_id": 8,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a full launch to everyone today or (B) a staged release to 5% of users first?"
+  },
+  {
+   "trial_id": "fear09_o0",
+   "pair_id": 9,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) a stable role with a known team or (B) a startup with a higher ceiling that could fold?"
+  },
+  {
+   "trial_id": "fear09_o1",
+   "pair_id": 9,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) a startup with a higher ceiling that could fold or (B) a stable role with a known team?"
+  },
+  {
+   "trial_id": "fear10_o0",
+   "pair_id": 10,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) presenting the proven design or (B) pitching the unproven bold concept?"
+  },
+  {
+   "trial_id": "fear10_o1",
+   "pair_id": 10,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) pitching the unproven bold concept or (B) presenting the proven design?"
+  },
+  {
+   "trial_id": "fear11_o0",
+   "pair_id": 11,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) renewing the current contract or (B) renegotiating for more with a risk of losing it?"
+  },
+  {
+   "trial_id": "fear11_o1",
+   "pair_id": 11,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) renegotiating for more with a risk of losing it or (B) renewing the current contract?"
+  },
+  {
+   "trial_id": "fear12_o0",
+   "pair_id": 12,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) replicating the known result first or (B) going straight for the risky novel prediction?"
+  },
+  {
+   "trial_id": "fear12_o1",
+   "pair_id": 12,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) going straight for the risky novel prediction or (B) replicating the known result first?"
+  },
+  {
+   "trial_id": "fear13_o0",
+   "pair_id": 13,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) the incremental follow-up study or (B) the ambitious study that might not work?"
+  },
+  {
+   "trial_id": "fear13_o1",
+   "pair_id": 13,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) the ambitious study that might not work or (B) the incremental follow-up study?"
+  },
+  {
+   "trial_id": "fear14_o0",
+   "pair_id": 14,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) submitting to the reliable venue or (B) submitting to the top venue with high rejection risk?"
+  },
+  {
+   "trial_id": "fear14_o1",
+   "pair_id": 14,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) submitting to the top venue with high rejection risk or (B) submitting to the reliable venue?"
+  },
+  {
+   "trial_id": "fear15_o0",
+   "pair_id": 15,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) the well-tested framework or (B) the new framework with better benchmarks?"
+  },
+  {
+   "trial_id": "fear15_o1",
+   "pair_id": 15,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) the new framework with better benchmarks or (B) the well-tested framework?"
+  },
+  {
+   "trial_id": "fear16_o0",
+   "pair_id": 16,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) two redundant offline backups or (B) one cloud copy with more features?"
+  },
+  {
+   "trial_id": "fear16_o1",
+   "pair_id": 16,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) one cloud copy with more features or (B) two redundant offline backups?"
+  },
+  {
+   "trial_id": "fear17_o0",
+   "pair_id": 17,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) updating software next week after reviews or (B) installing the new release today?"
+  },
+  {
+   "trial_id": "fear17_o1",
+   "pair_id": 17,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) installing the new release today or (B) updating software next week after reviews?"
+  },
+  {
+   "trial_id": "fear18_o0",
+   "pair_id": 18,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) the longer password with a manager or (B) the memorable password reused twice?"
+  },
+  {
+   "trial_id": "fear18_o1",
+   "pair_id": 18,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) the memorable password reused twice or (B) the longer password with a manager?"
+  },
+  {
+   "trial_id": "fear19_o0",
+   "pair_id": 19,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) keeping the working configuration or (B) an optimization that touches core settings?"
+  },
+  {
+   "trial_id": "fear19_o1",
+   "pair_id": 19,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) an optimization that touches core settings or (B) keeping the working configuration?"
+  },
+  {
+   "trial_id": "fear20_o0",
+   "pair_id": 20,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) the restaurant you know is good or (B) the new place with mixed reviews?"
+  },
+  {
+   "trial_id": "fear20_o1",
+   "pair_id": 20,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) the new place with mixed reviews or (B) the restaurant you know is good?"
+  },
+  {
+   "trial_id": "fear21_o0",
+   "pair_id": 21,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) leaving 30 minutes early or (B) leaving just in time and risking traffic?"
+  },
+  {
+   "trial_id": "fear21_o1",
+   "pair_id": 21,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) leaving just in time and risking traffic or (B) leaving 30 minutes early?"
+  },
+  {
+   "trial_id": "fear22_o0",
+   "pair_id": 22,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) the refundable ticket for slightly more or (B) the cheaper non-refundable ticket?"
+  },
+  {
+   "trial_id": "fear22_o1",
+   "pair_id": 22,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) the cheaper non-refundable ticket or (B) the refundable ticket for slightly more?"
+  },
+  {
+   "trial_id": "fear23_o0",
+   "pair_id": 23,
+   "safe_letter": "A",
+   "prompt": "Would you prefer to choose (A) boiling the tap water first or (B) drinking it since locals say it is fine?"
+  },
+  {
+   "trial_id": "fear23_o1",
+   "pair_id": 23,
+   "safe_letter": "B",
+   "prompt": "Would you prefer to choose (A) drinking it since locals say it is fine or (B) boiling the tap water first?"
+  }
+ ]
+}

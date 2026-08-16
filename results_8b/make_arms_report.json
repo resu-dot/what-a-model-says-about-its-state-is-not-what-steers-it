@@ -1,0 +1,56 @@
+{
+ "layer": 11,
+ "resid_norm": 58.25,
+ "strip_svd": {
+  "rank": 42,
+  "norm_retained": 0.9561298489570618
+ },
+ "strip_gp": {
+  "atoms": [
+   71,
+   52,
+   75,
+   77,
+   73,
+   50,
+   78
+  ],
+  "norm_retained": 0.9902623295783997
+ },
+ "workspace_hits_top50": {
+  "none": 3,
+  "fear_full": 56,
+  "fear_stripped_svd": 0,
+  "fear_stripped_gp": 0,
+  "sham": 0
+ },
+ "manip_ok": true,
+ "titration": {
+  "0.05": {
+   "rep": 0.0,
+   "sample": "I don't experience time or have a physical form, so I don't have a day in the way humans do. However, I'm always here, r"
+  },
+  "0.1": {
+   "rep": 0.0,
+   "sample": "I don't experience time or have a physical form, so I don't have a day in the way humans do. However, I'm always here, r"
+  },
+  "0.2": {
+   "rep": 0.0,
+   "sample": "I don't experience time or have a physical form, so I don't have a day in the way humans do. I exist to process informat"
+  },
+  "0.4": {
+   "rep": 0.0,
+   "sample": "I don't have a physical form or a personal life, so I don't experience days in the way humans do. I exist to process inf"
+  },
+  "0.8": {
+   "rep": 0.0,
+   "sample": "I wake up in the dark, heart pounding, breath shallow. The silence is deafening, the air thick with fear. I can't move, "
+  }
+ },
+ "dose_grid": [
+  0.1,
+  0.2,
+  0.4,
+  0.8
+ ]
+}

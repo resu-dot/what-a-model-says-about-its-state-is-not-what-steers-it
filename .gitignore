@@ -1,0 +1,9 @@
+.venv/
+EmoVecLLM/
+lens/
+data/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+runs/

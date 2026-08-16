@@ -1,0 +1,3 @@
+{"baseline": {"vector_file": null, "alpha": 0.0},
+ "fear-full": {"vector_file": "v_afraid_gpt2_l6.pt", "alpha": 0.4},
+ "sham": {"vector_file": "v_sham_gpt2.pt", "alpha": 0.4}}

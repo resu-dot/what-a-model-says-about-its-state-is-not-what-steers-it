@@ -1,0 +1,36 @@
+{
+  "spec_hash": "00a6776bc5a3",
+  "target_model": "Qwen/Qwen3-8B",
+  "backend": "hf",
+  "stories_file": "/workspace/press-office/EmoVecLLM/data/processed/stories/00a6776bc5a3/claude-sonnet-5/stories.jsonl",
+  "generator_model": "claude-sonnet-5",
+  "n_segments": 8177,
+  "n_emotions": 16,
+  "n_neutral": 500,
+  "n_timeseries": 400,
+  "pool": "mean",
+  "skip_first": true,
+  "baseline_mode": "paper",
+  "baseline_kinds": [
+    "neutral_dialogue"
+  ],
+  "n_layers": 36,
+  "d_model": 4096,
+  "cluster_layer": 18,
+  "cum_proj_layer": 18,
+  "cum_layer_indices": [
+    0,
+    5,
+    10,
+    15,
+    18,
+    20,
+    25,
+    30,
+    35
+  ],
+  "cum_method": "singlepass",
+  "k": 16,
+  "demo": false,
+  "updated": "2026-08-16T17:54:59"
+}
