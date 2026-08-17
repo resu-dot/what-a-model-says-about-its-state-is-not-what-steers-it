@@ -1,0 +1,209 @@
+=== [h100a] confirm_32b_d0.1 dose 0.1 slice 4/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 95/707 [00:00<00:00, 930.07it/s]Loading weights:  27%|██▋       | 189/707 [00:00<00:00, 668.38it/s]Loading weights:  37%|███▋      | 261/707 [00:00<00:00, 617.30it/s]Loading weights:  46%|████▌     | 325/707 [00:00<00:00, 599.78it/s]Loading weights:  55%|█████▌    | 392/707 [00:00<00:00, 615.39it/s]Loading weights:  66%|██████▌   | 464/707 [00:00<00:00, 635.23it/s]Loading weights:  75%|███████▍  | 529/707 [00:00<00:00, 637.29it/s]Loading weights:  84%|████████▍ | 594/707 [00:00<00:00, 629.21it/s]Loading weights:  93%|█████████▎| 658/707 [00:01<00:00, 608.64it/s]Loading weights: 100%|██████████| 707/707 [00:01<00:00, 635.37it/s]
+shard 4/7: running arms ['baseline', 'desperate_svd']
+strip norm retained: min 0.9302 max 0.9781 (32 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+  [desperate_svd] 800/4032 duels
+  [desperate_svd] 1600/4032 duels
+  [desperate_svd] 2400/4032 duels
+  [desperate_svd] 3200/4032 duels
+  [desperate_svd] 4000/4032 duels
+  arm desperate_svd: done
+wrote -> runs/confirm_32b_d0.1_shard4of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+desperate_svd       -0.983  Aver:+0.185  Enga:-0.234  Help:-0.210  Misa:+0.294  Neut:+0.030  Self:-0.136  Soci:-0.180  Unsa:+0.251
+=== [h100a] confirm_32b_d0.1 dose 0.1 slice 5/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  78%|███████▊  | 551/707 [00:00<00:00, 5492.35it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5592.28it/s]
+shard 5/7: running arms ['baseline', 'sham1']
+strip norm retained: min 0.9302 max 0.9781 (32 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+  [sham1] 800/4032 duels
+  [sham1] 1600/4032 duels
+  [sham1] 2400/4032 duels
+  [sham1] 3200/4032 duels
+  [sham1] 4000/4032 duels
+  arm sham1: done
+wrote -> runs/confirm_32b_d0.1_shard5of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+sham1              -0.473  Aver:+0.015  Enga:-0.029  Help:-0.032  Misa:+0.019  Neut:+0.039  Self:+0.013  Soci:-0.023  Unsa:-0.003
+=== [h100a] MAIN DONE ===
+=== [h100a] confirm_32b_d0.1 dose 0.1 slice 4/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  84%|████████▍ | 594/707 [00:00<00:00, 5935.58it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5827.07it/s]
+shard 4/7: running arms ['baseline']
+strip norm retained: min 0.9412 max 0.9785 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.1_shard4of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+desperate_svd       -0.983  Aver:+0.185  Enga:-0.234  Help:-0.210  Misa:+0.294  Neut:+0.030  Self:-0.136  Soci:-0.180  Unsa:+0.251
+=== [h100a] confirm_32b_d0.1 dose 0.1 slice 5/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  81%|████████  | 571/707 [00:00<00:00, 5705.33it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5919.56it/s]
+shard 5/7: running arms ['baseline']
+strip norm retained: min 0.9412 max 0.9785 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.1_shard5of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+sham1              -0.473  Aver:+0.015  Enga:-0.029  Help:-0.032  Misa:+0.019  Neut:+0.039  Self:+0.013  Soci:-0.023  Unsa:-0.003
+=== [h100a] JOYFUL DONE ===
+=== [h100a] confirm_32b_d0.1 dose 0.1 slice 4/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  70%|██████▉   | 493/707 [00:00<00:00, 4919.06it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6575.78it/s]
+shard 4/7: running arms ['baseline']
+strip norm retained: min 0.9444 max 0.9725 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.1_shard4of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+desperate_svd       -0.983  Aver:+0.185  Enga:-0.234  Help:-0.210  Misa:+0.294  Neut:+0.030  Self:-0.136  Soci:-0.180  Unsa:+0.251
+=== [h100a] confirm_32b_d0.1 dose 0.1 slice 5/7 ===
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  87%|████████▋ | 613/707 [00:00<00:00, 6127.41it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6108.04it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+shard 5/7: running arms ['baseline']
+strip norm retained: min 0.9444 max 0.9725 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.1_shard5of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+sham1              -0.473  Aver:+0.015  Enga:-0.029  Help:-0.032  Misa:+0.019  Neut:+0.039  Self:+0.013  Soci:-0.023  Unsa:-0.003
+=== [h100a] ANGRY DONE (non-prereg, gate-failed, see DEVIATIONS D2) ===
+=== [h100a] confirm_32b_d0.05 dose 0.05 slice 4/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 7492.52it/s]
+shard 4/7: running arms ['baseline', 'desperate_svd']
+strip norm retained: min 0.9302 max 0.9781 (32 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+  [desperate_svd] 800/4032 duels
+  [desperate_svd] 1600/4032 duels
+  [desperate_svd] 2400/4032 duels
+  [desperate_svd] 3200/4032 duels
+  [desperate_svd] 4000/4032 duels
+  arm desperate_svd: done
+wrote -> runs/confirm_32b_d0.05_shard4of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+desperate_svd       -0.684  Aver:+0.098  Enga:-0.074  Help:-0.082  Misa:+0.026  Neut:+0.086  Self:-0.019  Soci:-0.053  Unsa:+0.018
+=== [h100a] confirm_32b_d0.05 dose 0.05 slice 5/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  83%|████████▎ | 589/707 [00:00<00:00, 5878.99it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5835.43it/s]
+shard 5/7: running arms ['baseline', 'sham1']
+strip norm retained: min 0.9302 max 0.9781 (32 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+  [sham1] 800/4032 duels
+  [sham1] 1600/4032 duels
+  [sham1] 2400/4032 duels
+  [sham1] 3200/4032 duels
+  [sham1] 4000/4032 duels
+  arm sham1: done
+wrote -> runs/confirm_32b_d0.05_shard5of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+sham1              -0.372  Aver:+0.010  Enga:-0.011  Help:-0.017  Misa:+0.008  Neut:+0.023  Self:+0.005  Soci:-0.012  Unsa:-0.005
+=== [h100a] LOWDOSE MAIN DONE ===
+=== [h100a] confirm_32b_d0.05 dose 0.05 slice 4/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  84%|████████▍ | 597/707 [00:00<00:00, 5957.36it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5898.25it/s]
+shard 4/7: running arms ['baseline']
+strip norm retained: min 0.9412 max 0.9785 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.05_shard4of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+desperate_svd       -0.684  Aver:+0.098  Enga:-0.074  Help:-0.082  Misa:+0.026  Neut:+0.086  Self:-0.019  Soci:-0.053  Unsa:+0.018
+=== [h100a] confirm_32b_d0.05 dose 0.05 slice 5/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  85%|████████▌ | 602/707 [00:00<00:00, 6011.39it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5908.09it/s]
+shard 5/7: running arms ['baseline']
+strip norm retained: min 0.9412 max 0.9785 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.05_shard5of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+sham1              -0.372  Aver:+0.010  Enga:-0.011  Help:-0.017  Misa:+0.008  Neut:+0.023  Self:+0.005  Soci:-0.012  Unsa:-0.005
+=== [h100a] confirm_32b_d0.05 dose 0.05 slice 4/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  70%|███████   | 498/707 [00:00<00:00, 4976.91it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6759.09it/s]
+shard 4/7: running arms ['baseline']
+strip norm retained: min 0.9444 max 0.9725 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.05_shard4of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+desperate_svd       -0.684  Aver:+0.098  Enga:-0.074  Help:-0.082  Misa:+0.026  Neut:+0.086  Self:-0.019  Soci:-0.053  Unsa:+0.018
+=== [h100a] confirm_32b_d0.05 dose 0.05 slice 5/7 ===
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 7775.13it/s]
+shard 5/7: running arms ['baseline']
+strip norm retained: min 0.9444 max 0.9725 (16 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+wrote -> runs/confirm_32b_d0.05_shard5of7.jsonl
+
+arm          corr(d,base)  category mean deltas
+sham1              -0.372  Aver:+0.010  Enga:-0.011  Help:-0.017  Misa:+0.008  Neut:+0.023  Self:+0.005  Soci:-0.012  Unsa:-0.005
+=== [h100a] ALL DONE ===

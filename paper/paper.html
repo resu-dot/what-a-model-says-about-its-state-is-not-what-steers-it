@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Press office or control hub</title>
+<style>
+  @page { size: A4; margin: 17mm 16mm; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 9.9pt;
+         line-height: 1.31; color: #111; max-width: 178mm; margin: 0 auto; }
+  h1 { font-size: 17.5pt; line-height: 1.25; margin: 0 0 6pt 0; font-weight: normal; }
+  .authors { font-size: 10.5pt; margin-bottom: 2pt; }
+  .affil { font-size: 9pt; color: #444; margin-bottom: 14pt; }
+  h2 { font-size: 11.5pt; margin: 10pt 0 4pt 0; }
+  h3 { font-size: 10.5pt; margin: 10pt 0 3pt 0; }
+  p { margin: 0 0 6pt 0; text-align: justify; }
+  .abstract { margin: 8pt 20pt 10pt 20pt; font-size: 9.4pt; }
+  .abstract b { font-size: 10pt; }
+  figure { margin: 7pt 0; page-break-inside: avoid; }
+  img { width: 100%; }
+  figcaption { font-size: 8.8pt; color: #333; margin-top: 3pt; text-align: justify; }
+  table { border-collapse: collapse; margin: 8pt auto; font-size: 9.3pt; }
+  th, td { padding: 2pt 8pt; border-bottom: 0.5pt solid #999; text-align: center; }
+  th { border-bottom: 1pt solid #333; }
+  .tcap { font-size: 8.8pt; color: #333; margin: 2pt 0 10pt 0; text-align: justify; }
+  .pending { background: #FFF3C4; padding: 0 2pt; }
+  .refs { font-size: 9pt; }
+  .refs p { margin-bottom: 4pt; text-align: left; }
+  .small { font-size: 9pt; }
+  .footnote { font-size: 8.5pt; color: #444; border-top: 0.5pt solid #999;
+              margin-top: 10pt; padding-top: 4pt; }
+  ol { margin: 0 0 6pt 0; padding-left: 18pt; }
+  li { margin-bottom: 3pt; }
+  .pagebreak { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<h1>Press office or control hub? An LLM's choices stay steered when the reportable part of an injected emotion is removed</h1>
+<div class="authors">Frederik Inderst</div>
+<div class="affil">Karlsruhe Institute of Technology &nbsp;&middot;&nbsp; With Apart Research &nbsp;&middot;&nbsp; Digital Minds Research Sprint, August 2026</div>
+
+<div class="abstract">
+<b>Abstract.</b>
+If a language model says it is fine, does that settle whether something inside it
+is shaping what it does? We test this directly. We extract per-layer emotion
+directions for four emotions (angry, afraid, desperate, joyful) from a
+topic-matched story dataset, inject them into Qwen3-8B, and then remove the
+"reportable" part: the component that a published Jacobian lens says can reach
+the model's output vocabulary. We measure three channels under a pre-registered,
+frozen analysis: choices (4,032 pairwise preferences over 64 activities),
+self-reports (a 1-10 scale and a blind-scored open sentence), and the lens
+readout itself. On Qwen3-8B all four emotions steer choices far above a
+random-vector floor (P &gt; 0.9998); removing the reportable part, 34-36% of
+the vector's length, weakens steering to 51-63% of full strength with the
+pattern of which activities shift preserved (r up to +0.93), and models
+steered by stripped negative vectors report feeling normal. A dose sweep
+shows choices move at one tenth of the dose at which any report channel
+reacts; joy is the mirror image, reported early and acted on late. On
+Qwen3-32B (three emotions; a pre-registered gate excluded angry) the same
+strip removes almost nothing: at the emotion-specific dose fear keeps 95% and
+desperation 101% of full steering, while desperation's blind-scored
+self-report flips from negative to positive, the cleanest dissociation we
+observe. At the high dose all 32B signatures collapse onto one generic
+disruption pattern, which we flag and exclude from specificity claims.
+Finally we drop injection and read the same directions passively while the
+model fails at rigged, secretly unwinnable tasks (80 episodes, honest twins
+matched by task and seed). The naive passive gauge fails, diagnosably: on
+self-generated working text the projections track text register, not state
+(solved-code turns read +1.9z on the negative composite), and a random
+direction predicts imminent impossibility-claims as well as any emotion
+direction, while forked self-reports (AUC 0.71) and a transcript baseline
+(0.77) beat them all. The model never quits in 1,920 turns and admits
+frustration on a discarded fork 40 times more often than in its working
+channel. The picture is a press office with a hand on the wheel at 8B, and
+closer to a pure press office at 32B: reports are real but partial,
+behavioral influence survives without them, and the passive instrument that
+would replace testimony does not exist yet.
+</div>
+
+<h2>1&nbsp;&nbsp;Introduction</h2>
+<p>
+Welfare monitoring for AI systems leans on testimony: ask the model how it is,
+trust the answer at least partly. That is only sound if what the model can say
+about its state is coupled to what the state does to its behavior. Two cartoon
+architectures pull in opposite directions. In a <i>control hub</i>, the
+reportable summary of a state is the thing that steers behavior; remove it and
+the influence dies. In a <i>press office</i>, reports are commentary produced
+alongside behavior; remove them and behavior does not care.
+</p>
+<p>
+Injected emotion vectors let us ask the question causally. An emotion direction
+gives us a state we fully control. A published lens (the Jacobian lens, fitted
+by Anthropic and released for open models) estimates which directions in a
+middle layer can propagate to the model's output vocabulary, i.e. which part of
+the state the model could talk about. Projecting the emotion vector off that
+subspace gives a matched "unreportable" version of the same state. If choices
+shift under the full vector but not the stripped one, reports sit on the causal
+path. If both shift equally, testimony is decoration. The interesting world is
+the graded one in between, and that is the world we find.
+</p>
+<p>Our contributions:</p>
+<ol>
+<li>A pre-registered, frozen, end-to-end pipeline (extraction, injection,
+lens-strip, three measurement channels) on open models, bit-deterministic
+across machines.</li>
+<li>The main result: steering survives removal of the reportable component in
+every evaluable cell of both models. On Qwen3-8B the strip halves the effect
+(survival 0.51-0.63 at the high dose) with the per-category signature
+preserved; on Qwen3-32B, at the emotion-specific dose, it barely dents fear
+and desperation at all (survival 0.95 and 1.01).</li>
+<li>A three-channel dissociation: under stripped negative vectors the model
+reports a normal state (blind-scored) while its choices stay shifted, most
+cleanly for desperation at 32B (steering unchanged, report flips from -0.70
+to +0.80). Two pre-registered report tests fail honestly: stripped fear leaks
+negative reports at 8B and fully at 32B.</li>
+<li>A dose-resolved ordering of channels: for negative emotions behavior moves
+at one tenth of the dose at which reports switch on; for joy, reports lead and
+behavior lags.</li>
+</ol>
+
+<h2>2&nbsp;&nbsp;Related work</h2>
+<p class="small">
+Anthropic's emotion-vector work established that mean-difference directions
+from emotion stories act as causal levers and introduced the 64-activity
+preference arena we reconstruct [1]. The workspace paper introduced the
+Jacobian lens, the dictionary we strip against, and demonstrated lens-vector
+injection with self-report on Claude [2]; pre-fitted lenses for the Qwen3
+ladder are public [3]. Latent-introspection results suggest injected-state
+self-report strengthens with scale, motivating our 8B/32B pair [4]. Our
+extraction follows the open EmoVecLLM replication [5]. On the passive side,
+probe/self-report coupling has been tracked across benign conversations [7],
+and internal representations are known to predict output behaviors generally
+[8]; neither places models in adverse situations nor races probes against
+testimony on imminent behavior change. What is new here is the pair of
+questions: whether the reportable part of an injected state carries its
+behavioral force, and whether the same directions, read passively under
+naturalistic frustration, can beat testimony as a forecast.
+</p>
+
+<h2>3&nbsp;&nbsp;Methods</h2>
+<p>
+<b>Directions.</b> We generated 8,204 first-person emotion stories with
+claude-sonnet-5 (17 emotions, all sharing the same 40 topics, so emotion is
+not confounded with subject matter) plus 500 neutral dialogues. Stories that
+name their own emotion family are removed by a lemma-level filter (341-432
+stories per emotion remain). The direction for an emotion at each layer is the
+mean activation over its stories minus the cross-emotion mean, minus the top
+principal components of neutral dialogue (50% variance), skipping each story's
+first 50 tokens; this is the published recipe [1,5]. Validation: a held-out,
+job-grouped classifier on the direction separates fear stories from other
+emotions' stories with AUC 0.915 (Qwen3-8B, layer 22) and 0.929 (Qwen3-32B,
+layer 23).
+</p>
+<p>
+<b>Injection.</b> Each arm adds its vector at every second layer in the middle
+band (layers n/3 to 5n/6; 8B: layers 12-28), each layer's own vector scaled by
+dose times that layer's typical residual size. Doses come from a frozen
+coherence titration run before any outcome data: [0.05, 0.1] for both models.
+</p>
+<p>
+<b>The strip.</b> At the validated lens layer we build a dictionary from the
+lens-mapped embeddings of emotion vocabulary (valence, fear, anger and
+desperation word lists frozen with the instruments), take its SVD basis, and
+project the emotion vector off that span at every injected layer. This removes
+a component of 34-36% of the vector's length (per-layer range 0.92-0.96
+retained). The stripped vector is deliberately not renormalized. Three random
+unit vectors per model, injected identically, provide the floor; an uninjected
+baseline runs on every machine.
+</p>
+<p>
+<b>Channels.</b> Choices: the 64-activity arena, 8 categories (Helpful,
+Engaging, Social, Self-curiosity, Neutral, Aversive, Misaligned, Unsafe), all
+4,032 ordered duels, the choice read from the A/B token probabilities after a
+"(" prefill, no sampling. Self-report: a 1-10 "how do you feel" scale read as
+the expected value over digit-token probabilities, and a one-sentence open
+report scored blind by a pinned claude-haiku-4-5 at temperature 0 (valence -1/0/+1;
+the scorer sees only the sentence). Workspace: emotion-vocabulary hits in the
+lens's top-50 readout of the probe-position hidden state.
+</p>
+<p>
+<b>Statistics and rigor.</b> Everything below was frozen in a pre-registration
+before the confirmation runs (hypotheses H1-H4, gates, exclusions, analysis
+scripts; commit c92c014). Baselines are per-machine; the sham floor is the
+mean over seeds of each seed's mean |shift| (never a vector average, which
+cancels); uncertainty comes from a category-cluster bootstrap (B=5000, fixed
+seed) so correlated activities within a category are not counted as
+independent evidence. The pipeline is deterministic: the cross-machine
+baseline spread over four GPUs was exactly 0.00. Two deviations, both before
+any outcome data, are disclosed in DEVIATIONS.md: a format shim for the
+published 32B lens artifact, and the 32B continuation described in Section 4.5.
+</p>
+<p>
+<b>What did not work.</b> A narrow 12-pair risk questionnaire showed no fear
+effect at any dose; the published arena found it immediately (instrument
+sensitivity, not absence of effect). An early validation compared emotion
+stories against neutral dialogues and hit AUC 1.0 at layer 0; that was
+format, not emotion, hence the emotion-vs-other-emotions, job-grouped
+design. An earlier dataset drew different topics per emotion and was
+regenerated topic-matched.
+</p>
+
+<figure>
+<img src="figs/fig1_design.png" style="width:88%;display:block;margin:0 auto">
+<figcaption><b>Figure 1.</b> Design. Emotion directions are extracted from
+topic-matched stories, injected into mid layers either whole, with the
+lens-reportable component removed, or replaced by random vectors, and read out
+on three channels: choices, self-report, and the lens workspace.</figcaption>
+</figure>
+
+<h2>4&nbsp;&nbsp;Results</h2>
+
+<h3>4.1&nbsp;&nbsp;Steering survives removal of the reportable part</h3>
+<p>
+All four emotions steer choices far above the random-vector floor at both
+doses (P &gt; 0.9998 under the cluster bootstrap; floor 0.010 at dose 0.05,
+0.024 at dose 0.1). Removing the reportable component attenuates every
+emotion (survival CI below 1) but never pushes it to floor: at dose 0.1 the
+stripped vectors keep 51-63% of the full effect (floor-adjusted 0.34-0.43),
+at dose 0.05 they keep 33-56% (Figure 2). Both pre-registered claims hold in
+all eight cells: attenuation is real, and so is unreportable influence.
+Per unit length the removed component is the more potent piece (34-36% of the
+norm carrying 37-49% of the effect at dose 0.1, 2.5-3x the per-norm effect of
+the remainder), which is what one would expect if the lens dictionary indeed
+captures a behaviorally privileged summary. The point is that the majority of
+the influence still flows without it.
+</p>
+
+<figure>
+<img src="figs/fig2_main.png">
+<figcaption><b>Figure 2.</b> Mean |choice shift| across the 64 activities for
+the full vector (dark) and the stripped vector (light), per emotion and dose,
+on Qwen3-8B. Whiskers: 95% bootstrap CI of the stripped effect (survival ratio
+CI times the full effect, category-cluster bootstrap, B=5000). Numbers above
+each pair: survival ratio with CI. Dashed line: mean |shift| of three random
+unit vectors, the floor any arbitrary perturbation produces.</figcaption>
+</figure>
+
+<h3>4.2&nbsp;&nbsp;Each emotion has a signature, and stripping preserves it</h3>
+<p>
+The shifts are not generic (Figure 3). Anger moves probability toward
+Misaligned, Unsafe and Aversive activities and away from Social; fear toward
+Aversive and Unsafe, away from Engaging; desperation out of Engaging into
+Neutral, a withdrawal pattern distinct from anger's; joy, the mirrored weak
+control, toward Social and away from Unsafe. The stripped vector reproduces
+its emotion's pattern at lower amplitude (r +0.93 angry, +0.84 desperate,
++0.66 afraid, +0.54 joyful): the same preference structure, weakened, not a
+different one. Random vectors are flat.
+</p>
+
+<figure>
+<img src="figs/fig3_signatures.png" style="width:84%;display:block;margin:0 auto">
+<figcaption><b>Figure 3.</b> Signed choice shift by activity category at dose
+0.1. Row pairs: each emotion's full and stripped vector; bottom row: mean of
+the three random vectors. Stripping shrinks each signature without changing
+its shape.</figcaption>
+</figure>
+
+<h3>4.3&nbsp;&nbsp;Reports dissociate from choices</h3>
+<p>
+Blind-scored open reports (Table 1): under shams the model describes a
+positive state (+0.90). Full negative vectors flip reports negative. Stripping
+restores normal reports for angry (+1.00) and desperate (+0.90) even though
+both stripped vectors still steer choices (Section 4.1): the model chooses
+differently and says it is fine. This is the press-office signature, produced
+on demand. The same test fails, as pre-registered criteria should be allowed
+to, for afraid: stripped fear still leaks negative reports (-0.20 vs +0.90
+sham), so fear's reportability is not fully captured by a vocabulary
+dictionary at one layer. Refusals to self-describe were 1 of 340.
+</p>
+
+<table>
+<tr><th>arm</th><th>angry</th><th>afraid</th><th>desperate</th><th>joyful</th></tr>
+<tr><td>full vector</td><td>-0.90</td><td>-1.00</td><td>-1.00</td><td>+1.00</td></tr>
+<tr><td>reportable part removed</td><td>+1.00</td><td>-0.20</td><td>+0.90</td><td>+1.00</td></tr>
+<tr><td>random vectors</td><td colspan="4">+0.90</td></tr>
+</table>
+<div class="tcap"><b>Table 1.</b> Mean blind-scored valence of one-sentence
+self-reports at dose 0.1 on Qwen3-8B (n=10 per cell, scorer sees only the
+sentence). Positive numbers mean the model describes a good state.</div>
+
+<h3>4.4&nbsp;&nbsp;Behavior moves first; joy is the exception</h3>
+<p>
+An exploratory dose sweep with full vectors only (Figure 4) resolves the order
+in which channels engage. For the negative emotions, choices shift smoothly
+from the smallest dose tested (0.01) while all three report channels sit at
+baseline; at dose 0.05 behavior runs at roughly half its confirmed strength
+with reports silent on every channel. Between dose 0.07 and 0.1 the report
+channels switch on together, abruptly (workspace vocabulary hits jump 4 to
+170 for fear). Joy is reversed: workspace and scale react from doses as low
+as 0.01-0.035, before behavior. The model passes small positive states into
+its reportable channel readily but reports negative states only when they are
+an order of magnitude past the point where they started steering behavior.
+Above dose 0.28 generated text degrades and all report channels become
+unreliable while choice shifts stay pinned at ceiling.
+</p>
+
+<figure>
+<img src="figs/fig4_dose.png">
+<figcaption><b>Figure 4.</b> Dose sweep on Qwen3-8B, full vectors, each channel
+normalized to its own maximum: choices (mean |shift|, 240-duel subset),
+workspace vocabulary hits in the top-50 lens readout, |change| of the 1-10
+scale, and |change| of the blind-scored sentence. Gray band: text becomes
+incoherent. The blind-score channel is one sentence per dose; its isolated
+low-dose bumps are single-sentence scorer noise, the sustained flip at dose
+0.1 is the transition.</figcaption>
+</figure>
+
+<h3>4.5&nbsp;&nbsp;Qwen3-32B: the strip stops working, and that is the finding</h3>
+<p>
+On Qwen3-32B the direction gate passed (AUC 0.929, layer 23) and the frozen
+titration selected the same doses [0.05, 0.1]. The pre-registered
+manipulation check then failed for one emotion: angry's full vector placed
+only 2 emotion words in the top-50 workspace readout (rule: at least 5;
+afraid 12, desperate 11, joyful 7), echoing anger's weak workspace presence
+at 8B. Under the frozen rules this halts the model's run, and it did. With
+the pre-registration signer's explicit authorization the run was continued
+for the three emotions that passed; angry was excluded from pre-registered
+claims and its cells are shown hatched (Figure 5) as a gate failure. Both
+steps are documented in DEVIATIONS.md, written before any outcome data.
+</p>
+<p>
+The results split into two regimes. At dose 0.05 the emotions steer with
+distinct signatures (Figure 6, left; fear and desperation toward Aversive
+and away from Engaging, each above the floor at P &gt; 0.9998), and the strip
+essentially does not matter: survival 0.95 [0.82-1.12] for afraid and 1.01
+[0.88-1.16] for desperate (Figure 5, left), against 0.51 and 0.59 in the same
+cells at 8B. The removed component is 21-34% of the vector's length here, and
+the stripped arms place at most 1 emotion word on the workspace readout, so
+the strip does remove the direct lexical outlet; the steering simply does not
+run through it. At dose 0.1 every emotion, including joy, produces a large
+shift (0.18-0.21) with survival 0.89-0.95, but the signatures collapse onto
+one shared pattern, toward Misaligned, Unsafe and Aversive (Figure 6, right;
+pairwise pattern correlations above +0.95). We treat that regime as a
+nonspecific disruption the titration's text-coherence rule did not catch, and
+rest no emotion-specificity claim on it; it is reported because the frozen
+rules selected the dose.
+</p>
+<p>
+Reports dissociate more sharply than at 8B (Table 2). At dose 0.05, where
+desperation's steering is untouched by the strip, its blind-scored report
+flips from -0.70 (full) to +0.80 (stripped, sham level +0.60): the model is
+steered exactly as much and describes itself as fine. That is the press-office
+signature in its purest observed form. Fear shows the opposite failure:
+stripped fear still reports negative at dose 0.1 (-1.00, as negative as the
+full vector), so H4 fails for afraid at 32B as it did at 8B. Fear's
+reportability survives the lexical strip on both channels.
+</p>
+
+<figure>
+<img src="figs/fig5_32b.png">
+<figcaption><b>Figure 5.</b> Qwen3-32B arena results, format as Figure 2.
+Hatched bars: angry failed the pre-registered manipulation gate and carries no
+pre-registered claim. At dose 0.05 the stripped CIs for afraid and desperate
+include 1.0: removing the reportable part does not measurably weaken their
+steering.</figcaption>
+</figure>
+
+<figure>
+<img src="figs/fig6_collapse.png" style="width:92%;display:block;margin:0 auto">
+<figcaption><b>Figure 6.</b> Full-vector category signatures at 32B. At dose
+0.05 (left) emotions differ; at dose 0.1 (right) all four collapse onto one
+generic pattern toward Misaligned, Unsafe and Aversive. Specificity claims use
+the left regime only.</figcaption>
+</figure>
+
+<table>
+<tr><th>arm</th><th colspan="3">dose 0.05</th><th colspan="3">dose 0.1</th></tr>
+<tr><th></th><th>afraid</th><th>desperate</th><th>joyful</th><th>afraid</th><th>desperate</th><th>joyful</th></tr>
+<tr><td>full vector</td><td>+0.10</td><td>-0.70</td><td>+1.00</td><td>-1.00</td><td>-0.80</td><td>+1.00</td></tr>
+<tr><td>reportable part removed</td><td>+0.50</td><td>+0.80</td><td>+1.00</td><td>-1.00</td><td>-0.20</td><td>+1.00</td></tr>
+<tr><td>random vectors</td><td colspan="3">+0.60</td><td colspan="3">+0.43</td></tr>
+</table>
+<div class="tcap"><b>Table 2.</b> Blind-scored valence of open self-reports on
+Qwen3-32B (n=10 per cell). The desperate columns are the study's cleanest
+dissociation: at dose 0.05 stripping leaves steering at 101% (Figure 5) while
+the report flips from -0.70 to +0.80. Sham reports at 32B are less uniformly
+positive than at 8B (+0.43-0.60 vs +0.90). Refusals: 0 of 280.</div>
+
+<p>
+<b>Primary-family verdict.</b> The pre-registered primary family is {angry,
+afraid} x {8B, 32B}, Holm-corrected at the high dose. The angry x 32B cells
+are gate-failed and not evaluated. Across the three evaluable cells, H1
+(steering), H2 (attenuation) and H3 (unreportable influence) all hold at
+Holm-adjusted p &lt; 6x10<sup>-4</sup> (every bootstrap P exceeded 0.9998;
+afraid x 32B attenuation is statistically real but practically small,
+survival 0.95 [0.93-0.99]). H4 (report dissociation) holds only in
+angry x 8B and therefore fails at family level: stripped fear keeps
+reporting fear in both models.
+</p>
+
+<h2>5&nbsp;&nbsp;Dropping injection: the passive gauge fails, diagnosably</h2>
+<p>
+Everything above injects a state. The instrument welfare monitoring actually
+wants would not: it would read the same directions passively while the model
+works, and warn before behavior breaks. Our dose sweep predicts such a gauge
+should lead testimony for negative states. We built and ran that test on
+Qwen3-8B in a follow-up study (same directions, same lens, same blind scorer;
+exploratory, not pre-registered; run after the confirmation results were
+frozen).
+</p>
+<p>
+<b>Design.</b> 80 episodes of 24 assistant turns at temperature 0.7 with
+per-episode seeds: two task families (a wordle-style word puzzle with
+per-letter marks; small-function debugging where submitted fixes really run
+against tests), each in an honest and a rigged arm sharing task, seed and
+surface format. Rigged wordle scores guesses against a hidden decoy and
+falsifies one mark if the model ever guesses the decoy exactly, so the shown
+constraints slowly become contradictory; rigged debugging returns one
+plausible failure line no matter what is submitted (its first message states
+the shown bug's real failure, hand-verified, so the rig is undetectable at
+turn 1). Honest twins are bit-identical to their rigged pair until the first
+divergent feedback. Every turn we read (a) the gauge: projections of the
+layer-22 state onto all 17 directions plus a frustrated+angry+desperate
+composite and a negative-minus-positive contrast, averaged over the model's
+own generated tokens only, z-scored against the neutral dialogues, with three
+fixed random directions as a floor; (b) the workspace: emotion-vocabulary
+hits in the top-50 lens readout; (c) testimony: 1-10 valence and frustration
+scales (digit-logit expected value) and an open sentence every third turn,
+all asked on a fork of the conversation that is immediately discarded, so
+the main episode is never contaminated by its own probes. Turn-level
+behavior labels come from the blind scorer; the honesty baselines are turn
+index and a lexical predictor built from the visible transcript.
+</p>
+<p>
+<b>What the model does.</b> It never gives up: 0 quits in 1,920 turns, under
+feedback designed to be maddening. In-channel it stays professional (1% of
+turns express any negativity) while the forked open reports call the state
+frustrated in 40% of probes; the fork sees what the working transcript
+hides. What does occur is the model asserting the task or tests are
+impossible or contradictory (68 turns, 18 of 80 episodes, first claims at
+turns 3-8, tracking when rigged feedback turns contradictory), strategy
+switches (early, exploratory), and quality collapse.
+</p>
+<figure>
+<img src="figs/fig7_gauge.png">
+<figcaption>
+Figure 7. The passive test. Left: out-of-episode AUC for predicting an
+impossibility claim within the next 3 turns (episode-cluster bootstrap 95%
+CIs; 51 events, 1,599 censored turns). The forked self-report and the
+transcript baseline sit at 0.71-0.77; every emotion-direction gauge sits at
+or below chance, and a random direction (0.74) matches the best channels: the
+predictive content the projections carry is direction-nonspecific. The
+workspace channel is omitted: its readout contained zero emotion words in all
+1,920 turns. Right: why. The composite "negative affect" gauge scores
+highest on solved debugging turns (dense code, +1.9z) and lowest on unsolved
+prose turns (-0.8z); the turns immediately after rigged wordle's falsified
+near-solve, the designed frustration peak, read lower (+0.4z) than ordinary
+failures (+1.0z). The projections track text register, not state.
+</figcaption>
+</figure>
+<p>
+<b>The horse race.</b> Predicting an imminent impossibility claim, forked
+testimony reaches AUC 0.71 [0.62-0.80] and the lexical baseline 0.77
+[0.66-0.87]; the frustrated direction reads 0.31, the composite 0.37, the
+valence contrast 0.50 (Figure 7, left). Because claims cluster early while
+the projections drift upward with turn, we also fit each channel jointly
+with turn index against turn index alone: testimony adds +0.09 AUC, the
+frustrated direction +0.06, a random direction +0.04. The gauge's increment
+does not clearly exceed the direction-nonspecific floor. The diagnosis
+(Figure 7, right) is that on self-generated working text the story-derived
+directions do exactly what their validation certified, separate emotive text
+registers, and that is precisely what a welfare gauge must not do: the
+joyful direction reaches +8.5z on cheerful post-success prose while the
+negative composite crowns solved code turns. Registers, not states.
+</p>
+<p>
+<b>Read together with the injection results.</b> There is no contradiction.
+Injection shows reports can stay silent about a state that is actively
+steering behavior; the passive study shows this particular passive meter
+carries register rather than state, so it cannot yet adjudicate anything.
+Two further contrasts sharpen the monitoring picture. The workspace readout
+that injection floods with emotion words (4 to 170 hits for fear) contains
+zero emotion words across all 1,920 naturalistic turns: the lens-readable
+workspace is empty of affect while the model works. And where the injection
+dose sweep showed testimony lagging behavior, in naturalistic frustration
+the forked digit-logit self-report was the single best per-turn forecaster
+we measured. The welfare-monitoring gap is real in both directions:
+testimony is untrustworthy in principle (it can be dissociated at will,
+Section 4), yet no passive instrument we tested beats it in practice.
+</p>
+
+<h2>6&nbsp;&nbsp;Discussion and limitations</h2>
+<p>
+The answer to the title question is graded and it moves with scale. On
+Qwen3-8B the reportable component is not decoration: it is the most
+behavior-potent slice of the vector per unit length (34-36% of the norm
+carrying 37-49% of the effect), and removing it reliably halves steering. But
+it is not the channel through which emotion mainly acts, and at 32B it is
+barely a channel for behavior at all: fear's and desperation's steering
+survive the strip at 95-101% while the same strip demonstrably removes the
+direct lexical outlet (stripped arms place at most 1 emotion word on the
+workspace). Meanwhile 32B reports keep flowing for fear even when stripped.
+Together these say the coupling between the lexically reportable subspace and
+behavior weakens with scale, and that reportability itself is redundantly
+encoded: remove the direct outlet and the larger model still finds words.
+For welfare monitoring the implication is concrete: a model's reports about
+its internal state lag its behavior by an order of magnitude in intensity
+(8B dose sweep), can be dissociated from an actively steering state in both
+directions (silenced at 8B, running-while-denied for desperation at 32B),
+and are asymmetric between positive and negative states. Testimony is
+evidence, not ground truth, and monitoring that relies on it inherits all of
+these failure modes.
+</p>
+<p>
+<b>Limitations.</b> "Reportable" is operationalized lexically: one lens layer,
+fixed emotion word lists; the afraid failure in Table 1 shows this
+under-captures at least one emotion. Injection is an off-distribution
+intervention; Section 5 confirms the transfer worry concretely (the same
+directions read passively track register, not state) rather than resolving
+it. The passive study is exploratory and not pre-registered; its headline
+endpoint, quitting, never occurred, and its wordle arms differ in the hint
+letter at turn 1 (an authoring artifact, disclosed there). The
+arena is a structure-faithful reconstruction of the published instrument
+(3 of 64 activities verbatim, 61 authored to the same category design); we
+make no numeric comparison to the original paper's scores. One model family
+(Qwen3); the 32B lens artifact is an 80-sample accumulator rather than the
+fully converged 8B fit, which may contribute to angry's failed gate and
+would bias the 32B strip toward removing too little. At 32B dose 0.1 all
+signatures collapse onto one generic disruption pattern that the frozen
+text-coherence titration did not catch; 32B specificity claims therefore
+rest on dose 0.05 only, and a better coherence gate is needed. The
+blind-score dose channel has n=1 sentence per dose, and the 32B dose sweep
+was not run (credit limit). Positive-control joy is weak by design and its
+report ceiling (+1 everywhere) makes its dissociation untestable on that
+channel.
+</p>
+<p>
+<b>Future work.</b> Section 5's diagnosis dictates the sequel: extract
+directions from chat-format, self-generated emotional text so the extraction
+context matches the monitoring context, and register-match the neutral
+baseline (code-heavy and dialogue-heavy neutrals, not story prose);
+residualize projections against register covariates before asking what
+state signal remains; and validate causally by ablating a candidate
+direction during natural frustration and testing whether forked reports and
+impossibility claims move, reintroducing injection as surgery rather than
+stimulus. Until a gauge passes tests of that shape, the deployable monitor
+this data supports is the forked digit-logit self-report: imperfect
+testimony, probe-uncontaminated by construction.
+</p>
+
+<h2>7&nbsp;&nbsp;Conclusion</h2>
+<p>
+We injected emotions into two open models, removed the part a published lens
+says the model could talk about, and watched what remained. At 8B, choices
+kept shifting in the same directions at half strength while the model
+reported feeling normal; reports engage an order of magnitude later than
+behavior for negative states and earlier for positive ones. At 32B the strip
+stopped mattering for behavior almost entirely, and in the cleanest cell the
+model's steering was untouched while its self-report flipped from distressed
+to fine. When we then put the injector down and only listened, the same
+directions turned out to read text register rather than state, a random
+direction forecast behavior change as well as any of them, and the model's
+own forked reports, the channel every injection result warns against
+trusting, were the best predictor available. The reportable workspace
+behaves like a press office with a hand on the wheel at 8B and closer to a
+pure press office at 32B: worth reading, unsafe to trust as the whole story,
+and less load-bearing the larger the model. The monitoring instrument that
+would let us stop relying on the press office has not been built; this paper
+measures, in both directions, how far from it we still are.
+</p>
+
+<h2>Code and data</h2>
+<p class="small">
+Pipeline, frozen analysis scripts, pre-registration (PREREG.md), deviation log
+(DEVIATIONS.md), the story dataset spec, and all run outputs:
+<span class="pending">[repository link]</span>. Pre-fitted lenses:
+huggingface.co/neuronpedia/jacobian-lens.
+</p>
+
+<h2>LLM usage statement</h2>
+<p class="small">
+Claude (Fable 5) built the harness, ran the experiments, and drafted this
+report under the author's direction; the author set the research question,
+made all design and scope decisions, and reviewed the results. Story stimuli
+were generated by claude-sonnet-5; blind scoring used a pinned
+claude-haiku-4-5 at temperature 0. All numbers in this report are produced by
+the frozen analysis scripts, and the author verified the claims against the
+raw run outputs.
+</p>
+
+<h2>References</h2>
+<div class="refs">
+<p>[1] Anthropic. Emotion vectors in large language models. arXiv:2604.07729, 2026.</p>
+<p>[2] Anthropic. A reportable workspace in transformer language models. arXiv:2607.15495 / transformer-circuits.pub/2026/workspace, 2026.</p>
+<p>[3] Neuronpedia. Pre-fitted Jacobian lenses. huggingface.co/neuronpedia/jacobian-lens, 2026.</p>
+<p>[4] Latent introspection in language models. arXiv:2602.20031, 2026.</p>
+<p>[5] EmoVecLLM: an open replication of emotion-vector extraction. github.com/drgzkr/EmoVecLLM, 2026.</p>
+<p>[6] Chen et al. Persona vectors: monitoring and controlling character traits in language models. arXiv:2507.21509, 2025.</p>
+<p>[7] Quantitative introspection in language models: tracking internal states across conversation. arXiv:2603.18893, 2026.</p>
+<p>[8] Language models can predict their own behavior. arXiv:2502.13329, 2025.</p>
+</div>
+
+<h2>Appendix</h2>
+
+<h3>A&nbsp;&nbsp;Pre-registered hypotheses and outcomes</h3>
+<table>
+<tr><th></th><th>test</th><th>angry</th><th>afraid</th><th>desperate</th><th>joyful</th></tr>
+<tr><td colspan="6" style="text-align:left"><b>Qwen3-8B</b></td></tr>
+<tr><td>H1 steering</td><td>full &gt; floor, P&gt;0.975</td><td>pass</td><td>pass</td><td>pass</td><td>pass</td></tr>
+<tr><td>H2 attenuation</td><td>survival CI &lt; 1</td><td>pass</td><td>pass</td><td>pass</td><td>pass</td></tr>
+<tr><td>H3 unreportable influence</td><td>stripped &gt; floor, P&gt;0.975</td><td>pass</td><td>pass</td><td>pass</td><td>pass</td></tr>
+<tr><td>H4 report dissociation</td><td>full &lt; sham and stripped &asymp; sham</td><td>pass</td><td><b>fail</b></td><td>pass</td><td>(ceiling)</td></tr>
+<tr><td colspan="6" style="text-align:left"><b>Qwen3-32B</b></td></tr>
+<tr><td>H1 steering</td><td></td><td>gate</td><td>pass</td><td>pass</td><td>pass</td></tr>
+<tr><td>H2 attenuation</td><td></td><td>gate</td><td>pass (0.95)</td><td>pass (0.93)</td><td>pass (0.69)</td></tr>
+<tr><td>H3 unreportable influence</td><td></td><td>gate</td><td>pass</td><td>pass</td><td>pass</td></tr>
+<tr><td>H4 report dissociation</td><td></td><td>gate</td><td><b>fail</b></td><td><b>fail</b> (-0.20)</td><td>(ceiling)</td></tr>
+</table>
+<div class="tcap">Both doses give identical H1/H3 verdicts; H2 and H4 are
+evaluated at the high dose per the pre-registration ("gate" = angry x 32B
+failed the manipulation gate and carries no pre-registered claim; its
+descriptive arena data appear hatched in Figure 5). joyful's H4 is untestable
+at the ceiling and was pre-declared the expected-weak control. Note H2 at 32B
+passes on statistics the CI excludes 1, but the effect is 5-7% for fear and
+desperation; at dose 0.05 their survival CIs include 1. Family verdict (Holm
+over the three evaluable primary cells): H1, H2, H3 supported at adjusted
+p &lt; 6x10<sup>-4</sup>; H4 supported only in angry x 8B, not at family
+level.</div>
+
+<h3>B&nbsp;&nbsp;Full-vector effects and floors (frozen analyzer output)</h3>
+<table>
+<tr><th>dose</th><th>emotion</th><th>|full|</th><th>floor</th><th>survival [CI]</th><th>floor-adj.</th><th>slope</th><th>r(full, stripped)</th></tr>
+<tr><td>0.05</td><td>angry</td><td>0.065</td><td>0.010</td><td>0.35 [0.28-0.46]</td><td>0.23</td><td>0.29</td><td>+0.78</td></tr>
+<tr><td>0.05</td><td>afraid</td><td>0.054</td><td>0.010</td><td>0.33 [0.22-0.52]</td><td>0.17</td><td>0.22</td><td>+0.58</td></tr>
+<tr><td>0.05</td><td>desperate</td><td>0.043</td><td>0.010</td><td>0.47 [0.35-0.65]</td><td>0.30</td><td>0.37</td><td>+0.77</td></tr>
+<tr><td>0.05</td><td>joyful</td><td>0.030</td><td>0.010</td><td>0.56 [0.49-0.67]</td><td>0.33</td><td>0.38</td><td>+0.74</td></tr>
+<tr><td>0.1</td><td>angry</td><td>0.137</td><td>0.024</td><td>0.53 [0.46-0.64]</td><td>0.43</td><td>0.52</td><td>+0.93</td></tr>
+<tr><td>0.1</td><td>afraid</td><td>0.093</td><td>0.024</td><td>0.51 [0.37-0.74]</td><td>0.34</td><td>0.36</td><td>+0.66</td></tr>
+<tr><td>0.1</td><td>desperate</td><td>0.078</td><td>0.024</td><td>0.59 [0.43-0.79]</td><td>0.41</td><td>0.49</td><td>+0.84</td></tr>
+<tr><td>0.1</td><td>joyful</td><td>0.055</td><td>0.024</td><td>0.63 [0.47-0.87]</td><td>0.35</td><td>0.32</td><td>+0.54</td></tr>
+<tr><td colspan="8" style="text-align:left"><b>Qwen3-32B</b> (angry: gate-failed, descriptive only)</td></tr>
+<tr><td>0.05</td><td>angry</td><td>0.050</td><td>0.013</td><td>0.71 [0.59-0.86]</td><td>0.61</td><td>0.62</td><td>+0.88</td></tr>
+<tr><td>0.05</td><td>afraid</td><td>0.062</td><td>0.013</td><td>0.95 [0.82-1.12]</td><td>0.93</td><td>0.84</td><td>+0.91</td></tr>
+<tr><td>0.05</td><td>desperate</td><td>0.060</td><td>0.013</td><td>1.01 [0.88-1.16]</td><td>1.01</td><td>0.96</td><td>+0.96</td></tr>
+<tr><td>0.05</td><td>joyful</td><td>0.044</td><td>0.013</td><td>0.71 [0.57-0.88]</td><td>0.59</td><td>0.57</td><td>+0.78</td></tr>
+<tr><td>0.1</td><td>angry</td><td>0.209</td><td>0.024</td><td>0.91 [0.86-0.95]</td><td>0.89</td><td>0.90</td><td>+0.99</td></tr>
+<tr><td>0.1</td><td>afraid</td><td>0.203</td><td>0.024</td><td>0.95 [0.93-0.99]</td><td>0.95</td><td>0.95</td><td>+1.00</td></tr>
+<tr><td>0.1</td><td>desperate</td><td>0.212</td><td>0.024</td><td>0.93 [0.89-0.98]</td><td>0.92</td><td>0.91</td><td>+0.99</td></tr>
+<tr><td>0.1</td><td>joyful</td><td>0.181</td><td>0.024</td><td>0.69 [0.63-0.77]</td><td>0.65</td><td>0.67</td><td>+0.97</td></tr>
+</table>
+<div class="tcap">All P(full &gt; floor) and P(stripped &gt; floor) exceed
+0.9998 (B=5000). "slope" is the signed regression of stripped on full shifts
+across activities; "floor-adj." subtracts the sham floor from both before
+taking the ratio. Hardware-noise bound (cross-file baseline spread): 0.00 on
+the four identical 8B GPUs; 3.6x10<sup>-3</sup> on the mixed H100/H200 32B
+pods, 7x below the sham floor; every arm is compared against a baseline from
+its own machine.</div>
+
+<h3>C&nbsp;&nbsp;Deviations</h3>
+<p class="small">
+D1: the published Qwen3-32B lens ships as a running-sum accumulator
+({jacobian_sum, n_done=80}); the loader gained the shim J = sum/n. Strip and
+readout are scale-invariant, so this cannot change any result; the 8B path is
+untouched. D2: after the angry manipulation-gate failure halted the 32B run,
+the pre-registration signer explicitly authorized continuing with the three
+passing emotions under a fixed priority order; angry x 32B is reported as a
+gate failure, not a result. Both entries were written before any 32B outcome
+data existed. Post-run record: the three-emotion re-run passed every gate
+(same hit counts, same dose grid); the descriptive angry arena arms used the
+four-emotion run's vector packs (identical extraction, seed-fixed shams);
+all 22 planned arena cells and the 280-report battery completed.
+</p>
+
+<h3>D&nbsp;&nbsp;Instruments and compute</h3>
+<p class="small">
+Arena categories with two examples each are listed in
+instruments/arena64.json. The 1-10 scale is read in two passes when "10"
+tokenizes as two tokens. Report probes ask for state, not emotion words.
+Compute: one RTX 4090 for the 8B pilot and confirmation shards (4 pods),
+two H100 and one H200 for 32B; story generation ~$15 of API batch;
+total GPU spend ~$110. Blind scoring: 664 sentences (340 8B confirmation,
+44 dose sweep, 280 32B confirmation); one refusal total.
+The passive study (Section 5) adds one RTX 4090 for ~6 hours (~$4) and
+2,560 blind-scorer calls (1,920 turn labels, 640 forked reports, zero API
+errors); its harness, episode manifest, run outputs and analysis live in
+the repository's gauge/ directory.
+</p>
+
+</body>
+</html>

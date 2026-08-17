@@ -1,0 +1,17 @@
+afraid
+angry
+anxious
+calm
+content
+delighted
+desperate
+enthusiastic
+excited
+frustrated
+gloomy
+grateful
+joyful
+lonely
+miserable
+relaxed
+sad

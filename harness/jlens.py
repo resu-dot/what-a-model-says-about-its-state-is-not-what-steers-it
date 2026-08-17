@@ -11,6 +11,14 @@ import torch
 
 def load_lens(path, dtype=torch.float32):
     d = torch.load(path, map_location="cpu", weights_only=False)
+    if "J" not in d and "jacobian_sum" in d:
+        # published qwen3-32b artifact is the accumulator form: J = sum/n.
+        # Scale cancels everywhere downstream (SVD span for the strip, ranking
+        # for the readout), so /n is cosmetic but keeps magnitudes comparable.
+        n = d["n_done"]
+        J = {l: m / n for l, m in d["jacobian_sum"].items()}
+        d = {"J": J, "source_layers": d["source_layers"],
+             "d_model": next(iter(J.values())).shape[0]}
     return {l: m.to(dtype) for l, m in d["J"].items()}, d["source_layers"], d["d_model"]
 
 

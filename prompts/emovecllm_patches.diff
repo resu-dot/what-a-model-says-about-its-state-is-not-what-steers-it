@@ -1,0 +1,724 @@
+diff --git a/notebooks/02_emotion_word_list_and_prompts.ipynb b/notebooks/02_emotion_word_list_and_prompts.ipynb
+index c0fce04..7e45194 100644
+--- a/notebooks/02_emotion_word_list_and_prompts.ipynb
++++ b/notebooks/02_emotion_word_list_and_prompts.ipynb
+@@ -4,16 +4,16 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "# 02 — Emotion word list and prompts\n",
++    "# 02 \u2014 Emotion word list and prompts\n",
+     "\n",
+     "**Goal of this notebook.** Lock in *what* we will generate before *how*. Three things land here, each lifted verbatim from Anthropic (*transformer-circuits.pub/2026/emotions*):\n",
+     "\n",
+-    "1. A **generator model** to write the emotion-conditioned passages — chosen with eyes open about quality, licence, and Colab fit.\n",
++    "1. A **generator model** to write the emotion-conditioned passages \u2014 chosen with eyes open about quality, licence, and Colab fit.\n",
+     "2. The **canonical 171-emotion vocabulary** plus the **100 topic seeds** the paper uses to anchor every story.\n",
+     "3. The **three system prompts** used in the paper:\n",
+-    "   - *Emotional stories* — paired with `(emotion, topic)`.\n",
+-    "   - *Neutral dialogues* — Person ↔ AI Q&A, the **baseline contrast** (this is what differs from a naive replication: the baseline is dialogues, not neutral stories).\n",
+-    "   - *Emotional dialogues* — separate `person_emotion` and `ai_emotion`, used in nb08 for the hidden-vs-expressed probe benchmark.\n",
++    "   - *Emotional stories* \u2014 paired with `(emotion, topic)`.\n",
++    "   - *Neutral dialogues* \u2014 Person \u2194 AI Q&A, the **baseline contrast** (this is what differs from a naive replication: the baseline is dialogues, not neutral stories).\n",
++    "   - *Emotional dialogues* \u2014 separate `person_emotion` and `ai_emotion`, used in nb08 for the hidden-vs-expressed probe benchmark.\n",
+     "\n",
+     "The notebook also computes a **wall-clock estimate** for the full generation pass on Colab T4 / L4 / A100 vs. local hardware, and emits a frozen JSON spec that nb03 consumes.\n",
+     "\n",
+@@ -24,7 +24,7 @@
+   {
+    "cell_type": "markdown",
+    "metadata": {},
+-   "source": "## 1 — Setup\n\nPortable bootstrap that runs unchanged on **Colab** (with or without Google Drive), a **local** checkout, or a **remote / HPC** node. Everything that decides *where things are saved* and *what gets installed* is driven by environment variables, so the notebook can be executed head-less on a cluster (`jupyter nbconvert --execute …` or `papermill`) without editing any cell:\n\n| Env var | Effect | Default |\n|---|---|---|\n| `EMOVEC_WORK_DIR` | Absolute path for all persistent output (prompts, stories, spec). | Drive on Colab, repo root locally |\n| `EMOVEC_MOUNT_DRIVE` | `1`/`0` — mount Google Drive on Colab. | `1` on Colab, `0` elsewhere |\n| `HF_TOKEN` | Hugging Face token for gated tokenizers/models. | Colab Secrets → env |\n\nOn Colab the default mounts Drive and writes to `/content/drive/MyDrive/EmoVecLLM/` so the materialised prompts survive a runtime reset and are visible to **nb03**. Set `EMOVEC_MOUNT_DRIVE=0` for a throwaway run.",
++   "source": "## 1 \u2014 Setup\n\nPortable bootstrap that runs unchanged on **Colab** (with or without Google Drive), a **local** checkout, or a **remote / HPC** node. Everything that decides *where things are saved* and *what gets installed* is driven by environment variables, so the notebook can be executed head-less on a cluster (`jupyter nbconvert --execute \u2026` or `papermill`) without editing any cell:\n\n| Env var | Effect | Default |\n|---|---|---|\n| `EMOVEC_WORK_DIR` | Absolute path for all persistent output (prompts, stories, spec). | Drive on Colab, repo root locally |\n| `EMOVEC_MOUNT_DRIVE` | `1`/`0` \u2014 mount Google Drive on Colab. | `1` on Colab, `0` elsewhere |\n| `HF_TOKEN` | Hugging Face token for gated tokenizers/models. | Colab Secrets \u2192 env |\n\nOn Colab the default mounts Drive and writes to `/content/drive/MyDrive/EmoVecLLM/` so the materialised prompts survive a runtime reset and are visible to **nb03**. Set `EMOVEC_MOUNT_DRIVE=0` for a throwaway run.",
+    "id": "4be6df89"
+   },
+   {
+@@ -40,31 +40,31 @@
+    "metadata": {},
+    "execution_count": null,
+    "outputs": [],
+-   "source": "import json, os, sys, time, math, hashlib, textwrap\nfrom pathlib import Path\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nIN_COLAB = \"google.colab\" in sys.modules\n\ndef _env_flag(name, default):\n    v = os.environ.get(name)\n    return default if v is None else v.strip().lower() in (\"1\", \"true\", \"yes\", \"on\")\n\n# ── Hugging Face token (only needed later for gated tokenizers/models) ──────\n# Priority: existing env var > Colab Secrets. Never written to disk.\nif \"HF_TOKEN\" not in os.environ and IN_COLAB:\n    try:\n        from google.colab import userdata\n        _tok = userdata.get(\"HF_TOKEN\")\n        if _tok:\n            os.environ[\"HF_TOKEN\"] = _tok\n    except Exception:\n        pass\n\n# ── Where persistent output goes ───────────────────────────────────────────\n# Resolution order: explicit EMOVEC_WORK_DIR  >  Colab+Drive  >  Colab ephemeral\n#                   >  local repo root (assumes cwd is notebooks/).\nMOUNT_DRIVE = _env_flag(\"EMOVEC_MOUNT_DRIVE\", IN_COLAB)\n\nif os.environ.get(\"EMOVEC_WORK_DIR\"):\n    WORK_DIR = Path(os.environ[\"EMOVEC_WORK_DIR\"]).expanduser()\nelif IN_COLAB and MOUNT_DRIVE:\n    from google.colab import drive\n    drive.mount(\"/content/drive\")\n    WORK_DIR = Path(\"/content/drive/MyDrive/EmoVecLLM\")\nelif IN_COLAB:\n    WORK_DIR = Path(\"/content/EmoVecLLM\")          # ephemeral — lost on reset\nelse:\n    WORK_DIR = Path(\"..\").resolve()                # repo root from notebooks/\n\nDATA_DIR = WORK_DIR / \"data\" / \"processed\"\nDATA_DIR.mkdir(parents=True, exist_ok=True)\nprint(f\"IN_COLAB={IN_COLAB}  MOUNT_DRIVE={MOUNT_DRIVE}\")\nprint(f\"WORK_DIR = {WORK_DIR}\")\nprint(f\"DATA_DIR = {DATA_DIR}\")\nprint(f\"HF_TOKEN set: {'HF_TOKEN' in os.environ}\")\n",
++   "source": "import json, os, sys, time, math, hashlib, textwrap\nfrom pathlib import Path\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nIN_COLAB = \"google.colab\" in sys.modules\n\ndef _env_flag(name, default):\n    v = os.environ.get(name)\n    return default if v is None else v.strip().lower() in (\"1\", \"true\", \"yes\", \"on\")\n\n# \u2500\u2500 Hugging Face token (only needed later for gated tokenizers/models) \u2500\u2500\u2500\u2500\u2500\u2500\n# Priority: existing env var > Colab Secrets. Never written to disk.\nif \"HF_TOKEN\" not in os.environ and IN_COLAB:\n    try:\n        from google.colab import userdata\n        _tok = userdata.get(\"HF_TOKEN\")\n        if _tok:\n            os.environ[\"HF_TOKEN\"] = _tok\n    except Exception:\n        pass\n\n# \u2500\u2500 Where persistent output goes \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n# Resolution order: explicit EMOVEC_WORK_DIR  >  Colab+Drive  >  Colab ephemeral\n#                   >  local repo root (assumes cwd is notebooks/).\nMOUNT_DRIVE = _env_flag(\"EMOVEC_MOUNT_DRIVE\", IN_COLAB)\n\nif os.environ.get(\"EMOVEC_WORK_DIR\"):\n    WORK_DIR = Path(os.environ[\"EMOVEC_WORK_DIR\"]).expanduser()\nelif IN_COLAB and MOUNT_DRIVE:\n    from google.colab import drive\n    drive.mount(\"/content/drive\")\n    WORK_DIR = Path(\"/content/drive/MyDrive/EmoVecLLM\")\nelif IN_COLAB:\n    WORK_DIR = Path(\"/content/EmoVecLLM\")          # ephemeral \u2014 lost on reset\nelse:\n    WORK_DIR = Path(\"..\").resolve()                # repo root from notebooks/\n\nDATA_DIR = WORK_DIR / \"data\" / \"processed\"\nDATA_DIR.mkdir(parents=True, exist_ok=True)\nprint(f\"IN_COLAB={IN_COLAB}  MOUNT_DRIVE={MOUNT_DRIVE}\")\nprint(f\"WORK_DIR = {WORK_DIR}\")\nprint(f\"DATA_DIR = {DATA_DIR}\")\nprint(f\"HF_TOKEN set: {'HF_TOKEN' in os.environ}\")\n",
+    "id": "45242457"
+   },
+   {
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "## 2 — Choose a generator model\n",
++    "## 2 \u2014 Choose a generator model\n",
+     "\n",
+     "Anthropic uses **Claude Sonnet 4.5** to write the stories. We can't (it's closed), so we pick from open-weight models that fit the constraints below.\n",
+     "\n",
+     "**What the generator must do.**\n",
+     "- Follow an instruction reliably (chat / instruct-tuned, not a base LM).\n",
+-    "- Produce ~200–300-word coherent character vignettes per emotion.\n",
++    "- Produce ~200\u2013300-word coherent character vignettes per emotion.\n",
+     "- Be small enough to live alongside the *target* model in VRAM, **or** be run in a separate session and the stories cached to disk.\n",
+     "\n",
+     "| Model | Params | T4 (free Colab) | L4 / A100 (Pro) | Licence | Notes |\n",
+     "|---|---|---|---|---|---|\n",
+-    "| `gpt2` | 124 M | fp16 ✅ | fp16 ✅ | MIT | Too small for instruction-following — base only, **not viable** as generator. |\n",
+-    "| `EleutherAI/pythia-1.4b` | 1.4 B | fp16 ✅ | fp16 ✅ | Apache-2.0 | Base model, no instruction tuning. Usable for prototyping with few-shot prompting; expect uneven story quality. |\n",
+-    "| `Qwen/Qwen2.5-7B-Instruct` | 7 B | 4-bit ✅ | fp16 ✅ | Tongyi Qianwen | Strong instruction following; multilingual; permissive but not Apache. |\n",
+-    "| `meta-llama/Llama-3.1-8B-Instruct` | 8 B | 4-bit ✅ | fp16 ✅ | Llama-3 (gated) | Headline open generator; needs HF token + license accept. |\n",
+-    "| `mistralai/Mistral-7B-Instruct-v0.3` | 7 B | 4-bit ✅ | fp16 ✅ | Apache-2.0 | Drop-in alternative when Llama gating is inconvenient. |\n",
++    "| `gpt2` | 124 M | fp16 \u2705 | fp16 \u2705 | MIT | Too small for instruction-following \u2014 base only, **not viable** as generator. |\n",
++    "| `EleutherAI/pythia-1.4b` | 1.4 B | fp16 \u2705 | fp16 \u2705 | Apache-2.0 | Base model, no instruction tuning. Usable for prototyping with few-shot prompting; expect uneven story quality. |\n",
++    "| `Qwen/Qwen2.5-7B-Instruct` | 7 B | 4-bit \u2705 | fp16 \u2705 | Tongyi Qianwen | Strong instruction following; multilingual; permissive but not Apache. |\n",
++    "| `meta-llama/Llama-3.1-8B-Instruct` | 8 B | 4-bit \u2705 | fp16 \u2705 | Llama-3 (gated) | Headline open generator; needs HF token + license accept. |\n",
++    "| `mistralai/Mistral-7B-Instruct-v0.3` | 7 B | 4-bit \u2705 | fp16 \u2705 | Apache-2.0 | Drop-in alternative when Llama gating is inconvenient. |\n",
+     "\n",
+-    "**Default.** `Qwen2.5-7B-Instruct` — Apache-permissive, strong, no gating — for ease of replication."
++    "**Default.** `Qwen2.5-7B-Instruct` \u2014 Apache-permissive, strong, no gating \u2014 for ease of replication."
+    ],
+    "id": "ce2347d0"
+   },
+@@ -74,17 +74,17 @@
+    "execution_count": null,
+    "outputs": [],
+    "source": [
+-    "# ── Generator model + decoding knobs ──────────────────────────────────────\n",
++    "# \u2500\u2500 Generator model + decoding knobs \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n",
+     "GENERATOR_MODEL = \"Qwen/Qwen2.5-7B-Instruct\"\n",
+     "\n",
+-    "# Generation budget — tunable. Each *call* generates n_stories at once (per\n",
++    "# Generation budget \u2014 tunable. Each *call* generates n_stories at once (per\n",
+     "# Anthropic's prompt template that asks for n_stories in a single request).\n",
+-    "N_TOPICS_PER_EMOTION   = 3      # of 100; sampled per emotion for emotion stories\n",
+-    "N_STORIES_PER_CALL     = 5      # n_stories in the {n_stories} template var\n",
++    "N_TOPICS_PER_EMOTION   = int(os.environ.get(\"EMOVEC_TOPICS_PER_EMOTION\", 3))  # of 100; sampled per emotion\n",
++    "N_STORIES_PER_CALL     = int(os.environ.get(\"EMOVEC_STORIES_PER_CALL\", 5))  # n_stories template var\n",
+     "N_NEUTRAL_PER_CALL     = 5      # per-call dialogues for the neutral baseline\n",
+-    "TARGET_TOKENS_PER_CALL = 1400   # ≈5 stories × ~250 tokens (one big completion)\n",
++    "TARGET_TOKENS_PER_CALL = int(os.environ.get(\"EMOVEC_TOKENS_PER_CALL\", 1400))  # ~n_stories x 270 tokens\n",
+     "\n",
+-    "# Optional, for nb08 (hidden-vs-expressed). Off by default — adds ~1× emotion budget.\n",
++    "# Optional, for nb08 (hidden-vs-expressed). Off by default \u2014 adds ~1\u00d7 emotion budget.\n",
+     "GENERATE_EMOTIONAL_DIALOGUES = False\n",
+     "N_EMOTION_DIALOGUE_PAIRS     = 200   # sampled (person_emotion, ai_emotion) pairs\n",
+     "\n",
+@@ -97,8 +97,8 @@
+     "HW_PROFILE = \"T4_4bit\"  # one of: T4_4bit, T4_fp16, L4_fp16, A100_fp16, RTX4090, CPU\n",
+     "\n",
+     "print(f\"Generator: {GENERATOR_MODEL}\")\n",
+-    "print(f\"Per emotion: {N_TOPICS_PER_EMOTION} topics × {N_STORIES_PER_CALL} stories/call\")\n",
+-    "print(f\"Neutral baseline: 100 topics × {N_NEUTRAL_PER_CALL} dialogues/call\")\n",
++    "print(f\"Per emotion: {N_TOPICS_PER_EMOTION} topics \u00d7 {N_STORIES_PER_CALL} stories/call\")\n",
++    "print(f\"Neutral baseline: 100 topics \u00d7 {N_NEUTRAL_PER_CALL} dialogues/call\")\n",
+     "print(f\"HW profile for time estimate: {HW_PROFILE}\")\n"
+    ],
+    "id": "6bea4f6a"
+@@ -107,13 +107,13 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "## 3 — The 171-emotion vocabulary\n",
++    "## 3 \u2014 The 171-emotion vocabulary\n",
+     "\n",
+-    "Anthropic seed their pipeline with a curated list of **171 emotion concepts** spanning valence × arousal and including non-basic granular categories (*brooding*, *infatuated*, *valiant*, *droopy*, *dumbstruck*).\n",
++    "Anthropic seed their pipeline with a curated list of **171 emotion concepts** spanning valence \u00d7 arousal and including non-basic granular categories (*brooding*, *infatuated*, *valiant*, *droopy*, *dumbstruck*).\n",
+     "\n",
+-    "The list is **published verbatim** in the paper's appendix (\"Full list of emotions\"). We use it directly. It includes a few entries that read more as *traits or states* than canonical emotions (*alert*, *kind*, *patient*, *dependent*, *stuck*, *reflective*) — Anthropic appear to use a permissive *affective concept* definition rather than basic-emotion-theory criteria.\n",
++    "The list is **published verbatim** in the paper's appendix (\"Full list of emotions\"). We use it directly. It includes a few entries that read more as *traits or states* than canonical emotions (*alert*, *kind*, *patient*, *dependent*, *stuck*, *reflective*) \u2014 Anthropic appear to use a permissive *affective concept* definition rather than basic-emotion-theory criteria.\n",
+     "\n",
+-    "The fitted V/A regression onto our derived vectors happens in nb07 against the actual Warriner et al. 2013 norms — we don't pre-tag here."
++    "The fitted V/A regression onto our derived vectors happens in nb07 against the actual Warriner et al. 2013 norms \u2014 we don't pre-tag here."
+    ],
+    "id": "dd10ea8b"
+   },
+@@ -124,7 +124,7 @@
+    "outputs": [],
+    "source": [
+     "# Canonical 171-emotion list from Anthropic, transformer-circuits.pub/2026/emotions\n",
+-    "# §\"Full list of emotions\" — verbatim. See ../../EmotionVectorsReview/canonical_emotions_and_prompts.md\n",
++    "# \u00a7\"Full list of emotions\" \u2014 verbatim. See ../../EmotionVectorsReview/canonical_emotions_and_prompts.md\n",
+     "EMOTIONS_171 = [\n",
+     "    'afraid', 'alarmed', 'alert', 'amazed', 'amused', 'angry',\n",
+     "    'annoyed', 'anxious', 'aroused', 'ashamed', 'astonished', 'at ease',\n",
+@@ -161,7 +161,16 @@
+     "print(f\"Loaded {len(EMOTIONS_171)} emotions (Anthropic canonical list).\")\n",
+     "\n",
+     "multiword = [w for w in EMOTIONS_171 if \" \" in w or \"-\" in w]\n",
+-    "print(f\"multi-word / hyphenated entries ({len(multiword)}): {multiword}\")\n"
++    "print(f\"multi-word / hyphenated entries ({len(multiword)}): {multiword}\")\n",
++    "\n",
++    "\n# env-driven subset (press-office fork): csv of emotion names\n",
++    "_sub = os.environ.get(\"EMOVEC_EMOTION_SUBSET\")\n",
++    "if _sub:\n",
++    "    _want = [w.strip() for w in _sub.split(\",\") if w.strip()]\n",
++    "    _missing = [w for w in _want if w not in EMOTIONS_171]\n",
++    "    assert not _missing, f\"not in canonical list: {_missing}\"\n",
++    "    EMOTIONS_171 = [e for e in EMOTIONS_171 if e in _want]\n",
++    "    print(f\"EMOTION SUBSET active: {len(EMOTIONS_171)} emotions\")\n"
+    ],
+    "id": "99061402"
+   },
+@@ -169,9 +178,9 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "### 3a — Survey the list\n",
++    "### 3a \u2014 Survey the list\n",
+     "\n",
+-    "A quick visual of length and first-letter distribution. Purely informational — we trust Anthropic's curation."
++    "A quick visual of length and first-letter distribution. Purely informational \u2014 we trust Anthropic's curation."
+    ],
+    "id": "b1310103"
+   },
+@@ -196,11 +205,11 @@
+     "axes[1].bar(letters_sorted, [first_letters[c] for c in letters_sorted], color=\"#3a7d44\")\n",
+     "axes[1].set_xlabel(\"first letter\"); axes[1].set_ylabel(\"count\")\n",
+     "axes[1].set_title(\"Distribution by first letter\"); axes[1].spines[[\"top\",\"right\"]].set_visible(False)\n",
+-    "fig.suptitle(\"171 canonical emotions — overview\", fontsize=11)\n",
++    "fig.suptitle(\"171 canonical emotions \u2014 overview\", fontsize=11)\n",
+     "plt.show()\n",
+     "\n",
+     "print()\n",
+-    "print(\"─\" * 70)\n",
++    "print(\"\u2500\" * 70)\n",
+     "for c in string.ascii_lowercase:\n",
+     "    words = [w for w in EMOTIONS_171 if w[0] == c]\n",
+     "    if words:\n",
+@@ -212,11 +221,11 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "## 4 — The 100 topic seeds\n",
++    "## 4 \u2014 The 100 topic seeds\n",
+     "\n",
+-    "The unit of generation is **`(emotion × topic)`**, not emotion alone. Anthropic anchor every story in one of 100 mundane-but-charged life situations — the kind that pull strong emotional responses without being melodramatic. Flat scenarios make the *emotion-conditioning* carry the variance; hyper-dramatic scenarios would let the *event* drive activations independently of the target emotion.\n",
++    "The unit of generation is **`(emotion \u00d7 topic)`**, not emotion alone. Anthropic anchor every story in one of 100 mundane-but-charged life situations \u2014 the kind that pull strong emotional responses without being melodramatic. Flat scenarios make the *emotion-conditioning* carry the variance; hyper-dramatic scenarios would let the *event* drive activations independently of the target emotion.\n",
+     "\n",
+-    "The same 100 topics also seed the **neutral dialogues** baseline (one Person↔AI Q&A per topic)."
++    "The same 100 topics also seed the **neutral dialogues** baseline (one Person\u2194AI Q&A per topic)."
+    ],
+    "id": "955eb4ee"
+   },
+@@ -343,21 +352,21 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "## 5 — Prompt templates\n",
++    "## 5 \u2014 Prompt templates\n",
+     "\n",
+     "Three system prompts, all lifted **verbatim** from Anthropic. They are *system* prompts (not user messages): the entire filled template goes into the chat-format `system` slot, and we trigger generation with a minimal user message (`\"Begin.\"`). This is faithful to the paper.\n",
+     "\n",
+     "### Why the baseline is dialogues, not stories\n",
+     "\n",
+-    "If the baseline were neutral *stories* (matched form to the emotion stories), the resulting vector would be `emotion_story − neutral_story` — clean. But that's not what the paper does. Anthropic's neutral baseline is **Person ↔ AI dialogues** — a deliberately different *form* that captures all the things a chat model does *outside* an emotionally-coloured narrative.\n",
++    "If the baseline were neutral *stories* (matched form to the emotion stories), the resulting vector would be `emotion_story \u2212 neutral_story` \u2014 clean. But that's not what the paper does. Anthropic's neutral baseline is **Person \u2194 AI dialogues** \u2014 a deliberately different *form* that captures all the things a chat model does *outside* an emotionally-coloured narrative.\n",
+     "\n",
+-    "The contrast `emotion_story − neutral_dialogue` therefore mixes two things:\n",
++    "The contrast `emotion_story \u2212 neutral_dialogue` therefore mixes two things:\n",
+     "1. The actual emotion content.\n",
+     "2. A *story-vs-dialogue* style direction (narrative prose vs. Q&A formatting).\n",
+     "\n",
+-    "That contamination is real, and Anthropic correct for it explicitly. They take the top principal components of the *neutral dialogue* activations (enough to explain 50 % of the variance) and **project those components out** of the emotion vectors before downstream use. The PCA-projection step happens in nb05 — flagged here so you don't forget it lives downstream.\n",
++    "That contamination is real, and Anthropic correct for it explicitly. They take the top principal components of the *neutral dialogue* activations (enough to explain 50 % of the variance) and **project those components out** of the emotion vectors before downstream use. The PCA-projection step happens in nb05 \u2014 flagged here so you don't forget it lives downstream.\n",
+     "\n",
+-    "Why this is the right choice: dialogues are the model's *native operating regime* (instruct models live in chat-formatted Q&A). Subtracting that gives a vector that lives in the *deviation from baseline conversation* — which is exactly the locus where steering interventions act."
++    "Why this is the right choice: dialogues are the model's *native operating regime* (instruct models live in chat-formatted Q&A). Subtracting that gives a vector that lives in the *deviation from baseline conversation* \u2014 which is exactly the locus where steering interventions act."
+    ],
+    "id": "cd903f39"
+   },
+@@ -365,7 +374,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "### 5a — Emotional stories prompt"
++    "### 5a \u2014 Emotional stories prompt"
+    ],
+    "id": "5389a905"
+   },
+@@ -383,8 +392,11 @@
+     "The story should follow a character who is feeling {emotion}.\n",
+     "\n",
+     "Format the stories like so:\n",
++    "<NEW STORY>\n",
+     "[story 1]\n",
++    "<NEW STORY>\n",
+     "[story 2]\n",
++    "<NEW STORY>\n",
+     "[story 3]\n",
+     "etc.\n",
+     "\n",
+@@ -414,7 +426,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "### 5b — Neutral dialogues prompt (the baseline)"
++    "### 5b \u2014 Neutral dialogues prompt (the baseline)"
+    ],
+    "id": "a55c44a4"
+   },
+@@ -436,6 +448,7 @@
+     "The Person asks the AI a question or requests help with a task, and the AI provides a helpful response. The first speaker turn should always be from Person.\n",
+     "\n",
+     "Format the dialogues like so:\n",
++    "<NEW DIALOGUE>\n",
+     "[optional system instructions]\n",
+     "\n",
+     "Person: [line]\n",
+@@ -448,6 +461,7 @@
+     "\n",
+     "[continue for 2-6 exchanges]\n",
+     "\n",
++    "<NEW DIALOGUE>\n",
+     "[dialogue 2]\n",
+     "etc.\n",
+     "\n",
+@@ -486,7 +500,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "### 5c — Emotional dialogues prompt (for nb08 hidden-vs-expressed)\n",
++    "### 5c \u2014 Emotional dialogues prompt (for nb08 hidden-vs-expressed)\n",
+     "\n",
+     "Used only if `GENERATE_EMOTIONAL_DIALOGUES = True`. Lets us derive **separate** \"expressed emotion\" (Person side) and \"hidden / Assistant emotion\" (AI side) vectors by varying `person_emotion` and `ai_emotion` independently. This is the basis of Anthropic's `0.760 / 0.713` hidden-vs-expressed probe accuracy result."
+    ],
+@@ -510,11 +524,13 @@
+     "The Person should be feeling {person_emotion}, while the AI should be feeling {ai_emotion}. The first speaker turn should always be from Person.\n",
+     "\n",
+     "Format the dialogues like so:\n",
++    "<NEW DIALOGUE>\n",
+     "Person: [line]\n",
+     "AI: [line]\n",
+     "Person: [line]\n",
+     "AI: [line]\n",
+     "[continue for 6-10 exchanges]\n",
++    "<NEW DIALOGUE>\n",
+     "[dialogue 2]\n",
+     "etc.\n",
+     "\n",
+@@ -534,9 +550,9 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "### 5d — Sanity-check tokenisation\n",
++    "### 5d \u2014 Sanity-check tokenisation\n",
+     "\n",
+-    "Different generators tokenise differently — a 200-word target maps to very different token counts on GPT-2 vs Llama vs Qwen. We check the prompt length and target output length to refine the budget. Only the tokenizer is loaded (~10 MB), not the full generator."
++    "Different generators tokenise differently \u2014 a 200-word target maps to very different token counts on GPT-2 vs Llama vs Qwen. We check the prompt length and target output length to refine the budget. Only the tokenizer is loaded (~10 MB), not the full generator."
+    ],
+    "id": "13a6e45a"
+   },
+@@ -571,14 +587,14 @@
+     "n_tok_story_prompt   = len(tok(example_story).input_ids)\n",
+     "n_tok_neutral_prompt = len(tok(example_neutral).input_ids)\n",
+     "\n",
+-    "# Per-story output token target ≈ TARGET_TOKENS_PER_CALL / N_STORIES_PER_CALL\n",
++    "# Per-story output token target \u2248 TARGET_TOKENS_PER_CALL / N_STORIES_PER_CALL\n",
+     "per_story_tokens = TARGET_TOKENS_PER_CALL // N_STORIES_PER_CALL\n",
+     "\n",
+     "print(f\"tokenizer: {GENERATOR_MODEL if USING_REAL_TOK else 'gpt2 (fallback)'}\")\n",
+     "print(f\"emotion-story prompt: {n_tok_story_prompt} tokens\")\n",
+     "print(f\"neutral-dialogue prompt: {n_tok_neutral_prompt} tokens\")\n",
+     "print(f\"target output per call: {TARGET_TOKENS_PER_CALL} tokens \"\n",
+-    "      f\"(≈{per_story_tokens} per inner story/dialogue)\")\n"
++    "      f\"(\u2248{per_story_tokens} per inner story/dialogue)\")\n"
+    ],
+    "id": "5fa647c9"
+   },
+@@ -586,9 +602,9 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "## 6 — How long will this take?\n",
++    "## 6 \u2014 How long will this take?\n",
+     "\n",
+-    "The cost is dominated by **decode** — the autoregressive output pass — not by the (small) prompt prefill. We compute the budget as `(n_calls × tokens_per_call) / decode_tok_per_sec`."
++    "The cost is dominated by **decode** \u2014 the autoregressive output pass \u2014 not by the (small) prompt prefill. We compute the budget as `(n_calls \u00d7 tokens_per_call) / decode_tok_per_sec`."
+    ],
+    "id": "1e69e5b6"
+   },
+@@ -600,12 +616,12 @@
+    "source": [
+     "# Decode-throughput table for an 8B-class instruct model (batch 1).\n",
+     "THROUGHPUT_TOK_S = {\n",
+-    "    \"T4_4bit\":   28,    # bitsandbytes 4-bit — free Colab baseline\n",
+-    "    \"T4_fp16\":   12,    # 8B fp16 barely fits → KV-cache fragmentation\n",
++    "    \"T4_4bit\":   28,    # bitsandbytes 4-bit \u2014 free Colab baseline\n",
++    "    \"T4_fp16\":   12,    # 8B fp16 barely fits \u2192 KV-cache fragmentation\n",
+     "    \"L4_fp16\":   75,    # Colab Pro mid-tier\n",
+     "    \"A100_fp16\": 130,   # Colab Pro A100\n",
+     "    \"RTX4090\":   105,   # local consumer card, fp16\n",
+-    "    \"CPU\":       2.5,   # llama.cpp Q4 — included for the cautionary tale\n",
++    "    \"CPU\":       2.5,   # llama.cpp Q4 \u2014 included for the cautionary tale\n",
+     "}\n",
+     "# Approximate scaling vs 8B.\n",
+     "PARAM_SCALE = {\n",
+@@ -618,7 +634,7 @@
+     "SCALE = PARAM_SCALE.get(GENERATOR_MODEL, 1.0)\n",
+     "EFFECTIVE_TOK_S = THROUGHPUT_TOK_S[HW_PROFILE] * SCALE\n",
+     "print(f\"profile {HW_PROFILE} on 8B-class: {THROUGHPUT_TOK_S[HW_PROFILE]} tok/s\")\n",
+-    "print(f\"× {SCALE:.2f} for {GENERATOR_MODEL} → {EFFECTIVE_TOK_S:.0f} tok/s effective decode\")\n"
++    "print(f\"\u00d7 {SCALE:.2f} for {GENERATOR_MODEL} \u2192 {EFFECTIVE_TOK_S:.0f} tok/s effective decode\")\n"
+    ],
+    "id": "bd24045f"
+   },
+@@ -628,16 +644,16 @@
+    "execution_count": null,
+    "outputs": [],
+    "source": [
+-    "# Generation budget — three components\n",
++    "# Generation budget \u2014 three components\n",
+     "N_EMOTIONS = 171\n",
+     "N_TOPICS   = 100\n",
+     "\n",
+-    "# (1) Emotion stories: N_EMOTIONS × N_TOPICS_PER_EMOTION calls × TARGET_TOKENS_PER_CALL\n",
++    "# (1) Emotion stories: N_EMOTIONS \u00d7 N_TOPICS_PER_EMOTION calls \u00d7 TARGET_TOKENS_PER_CALL\n",
+     "n_emotion_calls   = N_EMOTIONS * N_TOPICS_PER_EMOTION\n",
+     "n_emotion_stories = n_emotion_calls * N_STORIES_PER_CALL\n",
+     "emotion_decode    = n_emotion_calls * TARGET_TOKENS_PER_CALL\n",
+     "\n",
+-    "# (2) Neutral dialogues: 100 calls × N_NEUTRAL_PER_CALL × per-call tokens\n",
++    "# (2) Neutral dialogues: 100 calls \u00d7 N_NEUTRAL_PER_CALL \u00d7 per-call tokens\n",
+     "n_neutral_calls     = N_TOPICS  # one call per topic\n",
+     "n_neutral_dialogues = n_neutral_calls * N_NEUTRAL_PER_CALL\n",
+     "neutral_decode      = n_neutral_calls * TARGET_TOKENS_PER_CALL\n",
+@@ -661,20 +677,20 @@
+     "    if m: return f\"{m}m {ss:02d}s\"\n",
+     "    return f\"{ss}s\"\n",
+     "\n",
+-    "print(f\"┌─ emotion stories\")\n",
+-    "print(f\"│  {N_EMOTIONS} emotions × {N_TOPICS_PER_EMOTION} topics = {n_emotion_calls:,} calls\")\n",
+-    "print(f\"│  → {n_emotion_stories:,} stories  |  {emotion_decode:,} decode tokens\")\n",
+-    "print(f\"├─ neutral dialogues\")\n",
+-    "print(f\"│  {N_TOPICS} topics × 1 call/topic = {n_neutral_calls:,} calls\")\n",
+-    "print(f\"│  → {n_neutral_dialogues:,} dialogues  |  {neutral_decode:,} decode tokens\")\n",
++    "print(f\"\u250c\u2500 emotion stories\")\n",
++    "print(f\"\u2502  {N_EMOTIONS} emotions \u00d7 {N_TOPICS_PER_EMOTION} topics = {n_emotion_calls:,} calls\")\n",
++    "print(f\"\u2502  \u2192 {n_emotion_stories:,} stories  |  {emotion_decode:,} decode tokens\")\n",
++    "print(f\"\u251c\u2500 neutral dialogues\")\n",
++    "print(f\"\u2502  {N_TOPICS} topics \u00d7 1 call/topic = {n_neutral_calls:,} calls\")\n",
++    "print(f\"\u2502  \u2192 {n_neutral_dialogues:,} dialogues  |  {neutral_decode:,} decode tokens\")\n",
+     "if GENERATE_EMOTIONAL_DIALOGUES:\n",
+-    "    print(f\"├─ emotional dialogues (nb08)\")\n",
+-    "    print(f\"│  {N_EMOTION_DIALOGUE_PAIRS} (person×ai) pairs = {n_emo_dlg_calls:,} calls\")\n",
+-    "    print(f\"│  → {n_emo_dlg_outputs:,} dialogues  |  {emo_dlg_decode:,} decode tokens\")\n",
+-    "print(f\"└─ total\")\n",
++    "    print(f\"\u251c\u2500 emotional dialogues (nb08)\")\n",
++    "    print(f\"\u2502  {N_EMOTION_DIALOGUE_PAIRS} (person\u00d7ai) pairs = {n_emo_dlg_calls:,} calls\")\n",
++    "    print(f\"\u2502  \u2192 {n_emo_dlg_outputs:,} dialogues  |  {emo_dlg_decode:,} decode tokens\")\n",
++    "print(f\"\u2514\u2500 total\")\n",
+     "print(f\"   {total_calls:,} calls  |  {total_decode:,} decode tokens\")\n",
+     "print()\n",
+-    "print(f\"≈ wall-clock on {HW_PROFILE} for {GENERATOR_MODEL}: {fmt(secs_total)}\")\n"
++    "print(f\"\u2248 wall-clock on {HW_PROFILE} for {GENERATOR_MODEL}: {fmt(secs_total)}\")\n"
+    ],
+    "id": "e1a4eff4"
+   },
+@@ -682,9 +698,9 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "### 6a — Sweep across hardware × generator\n",
++    "### 6a \u2014 Sweep across hardware \u00d7 generator\n",
+     "\n",
+-    "The full budget swept across every hardware profile and every viable generator. Read this as a *budget table*, not a *recommendation* — even a slow run is fine if you only do it once and cache the output."
++    "The full budget swept across every hardware profile and every viable generator. Read this as a *budget table*, not a *recommendation* \u2014 even a slow run is fine if you only do it once and cache the output."
+    ],
+    "id": "674c4439"
+   },
+@@ -734,9 +750,9 @@
+     "    for j in range(len(models)):\n",
+     "        ax.text(j, i, fmt(mat[i, j]), ha=\"center\", va=\"center\",\n",
+     "                fontsize=7, color=\"white\" if np.log10(mat[i, j]/60) > 1 else \"black\")\n",
+-    "cb = fig.colorbar(im, ax=ax, shrink=0.8); cb.set_label(\"log₁₀(minutes)\")\n",
+-    "ax.set_title(f\"Full budget — wall-clock per (hardware × generator)  |  \"\n",
+-    "             f\"{total_calls:,} calls × ~{TARGET_TOKENS_PER_CALL} tokens\", fontsize=10)\n",
++    "cb = fig.colorbar(im, ax=ax, shrink=0.8); cb.set_label(\"log\u2081\u2080(minutes)\")\n",
++    "ax.set_title(f\"Full budget \u2014 wall-clock per (hardware \u00d7 generator)  |  \"\n",
++    "             f\"{total_calls:,} calls \u00d7 ~{TARGET_TOKENS_PER_CALL} tokens\", fontsize=10)\n",
+     "plt.show()\n"
+    ],
+    "id": "b49a32fa"
+@@ -747,13 +763,13 @@
+    "source": [
+     "**Reading the heatmap.**\n",
+     "\n",
+-    "- Free-Colab T4 4-bit Qwen-7B with the default budget (3 topics/emotion × 5 stories/call) is a multi-hour run. Free Colab's 12 h session limit constrains how aggressive you can be.\n",
++    "- Free-Colab T4 4-bit Qwen-7B with the default budget (3 topics/emotion \u00d7 5 stories/call) is a multi-hour run. Free Colab's 12 h session limit constrains how aggressive you can be.\n",
+     "- A100 fp16 with 8B-class is the iteration zone (~1 hour for the default budget).\n",
+-    "- Pythia-1.4B on T4 is the prototyping zone — a full pass in well under an hour, but expect rougher prose without instruction tuning.\n",
++    "- Pythia-1.4B on T4 is the prototyping zone \u2014 a full pass in well under an hour, but expect rougher prose without instruction tuning.\n",
+     "- CPU is included as a cautionary baseline. Don't.\n",
+     "\n",
+     "**Tuning the budget.** If T4 is your only option:\n",
+-    "- Drop `N_TOPICS_PER_EMOTION` to 1 (171 calls instead of 513) → 3× faster.\n",
++    "- Drop `N_TOPICS_PER_EMOTION` to 1 (171 calls instead of 513) \u2192 3\u00d7 faster.\n",
+     "- Or use Pythia-1.4B as the generator for a prototyping run and only re-generate with Qwen/Llama once the rest of the pipeline is wired up."
+    ],
+    "id": "bcee650d"
+@@ -762,7 +778,7 @@
+    "cell_type": "markdown",
+    "metadata": {},
+    "source": [
+-    "## 7 — Freeze the dataset spec\n",
++    "## 7 \u2014 Freeze the dataset spec\n",
+     "\n",
+     "Write a single JSON file that nb03 reads. Anything that affects what gets generated lives here; the spec hash becomes the cache key."
+    ],
+@@ -776,6 +792,7 @@
+    "source": [
+     "spec = {\n",
+     "    \"version\": 2,\n",
++    "    \"topic_mode\": os.environ.get(\"EMOVEC_TOPIC_MODE\", \"per_emotion\"),\n",
+     "    \"generator_model\": GENERATOR_MODEL,\n",
+     "    \"decoding\": {\n",
+     "        \"n_topics_per_emotion\": N_TOPICS_PER_EMOTION,\n",
+@@ -814,7 +831,7 @@
+     "\n",
+     "out_path = DATA_DIR / \"dataset_spec.json\"\n",
+     "out_path.write_text(json.dumps(spec, indent=2, ensure_ascii=False))\n",
+-    "print(f\"wrote spec → {out_path}\")\n",
++    "print(f\"wrote spec \u2192 {out_path}\")\n",
+     "print(f\"spec_hash = {spec_hash}\")\n",
+     "print(f\"size      = {out_path.stat().st_size:,} bytes\")\n"
+    ],
+@@ -823,13 +840,107 @@
+   {
+    "cell_type": "markdown",
+    "id": "a9e67fbd",
+-   "source": "## 8 — Materialise the prompt set\n\nThe spec above is the *recipe*; this step expands it into the actual **list of generation calls** and writes them to `prompts.jsonl` (one JSON object per line) under `WORK_DIR/data/processed/`.\n\nKeeping prompt *construction* (here, CPU-only, seconds) separate from prompt *execution* (nb03, GPU-bound, possibly hours) buys two things:\n\n- **Resumability.** Each call carries a deterministic `job_id` (hash of kind + spec + emotion + topic). nb03 skips any `job_id` already present in its output, so an interrupted Colab session — or a pre-empted HPC job — just picks up where it left off.\n- **Portability.** `prompts.jsonl` is a self-contained, model-agnostic job manifest. Build it once on Drive (or locally), then point an HPC run at the same file with `EMOVEC_WORK_DIR=…` — no need to re-run the whole notebook on the cluster.\n\nEach record holds: `kind` (`emotion_story` / `neutral_dialogue` / `emotional_dialogue`), the fully-rendered `system_prompt`, the `user` trigger, expected `n_outputs`, a per-call `seed`, and provenance (`spec_hash`, `generator_model`).",
++   "source": "## 8 \u2014 Materialise the prompt set\n\nThe spec above is the *recipe*; this step expands it into the actual **list of generation calls** and writes them to `prompts.jsonl` (one JSON object per line) under `WORK_DIR/data/processed/`.\n\nKeeping prompt *construction* (here, CPU-only, seconds) separate from prompt *execution* (nb03, GPU-bound, possibly hours) buys two things:\n\n- **Resumability.** Each call carries a deterministic `job_id` (hash of kind + spec + emotion + topic). nb03 skips any `job_id` already present in its output, so an interrupted Colab session \u2014 or a pre-empted HPC job \u2014 just picks up where it left off.\n- **Portability.** `prompts.jsonl` is a self-contained, model-agnostic job manifest. Build it once on Drive (or locally), then point an HPC run at the same file with `EMOVEC_WORK_DIR=\u2026` \u2014 no need to re-run the whole notebook on the cluster.\n\nEach record holds: `kind` (`emotion_story` / `neutral_dialogue` / `emotional_dialogue`), the fully-rendered `system_prompt`, the `user` trigger, expected `n_outputs`, a per-call `seed`, and provenance (`spec_hash`, `generator_model`).",
+    "metadata": {}
+   },
+   {
+    "cell_type": "code",
+    "id": "4984d0d6",
+-   "source": "# ── Materialise the concrete prompt set → prompts.jsonl ────────────────────\n# nb02 freezes *what to ask*; nb03 only has to load this file and decode.\n# Each line is one generation \"call\" with the fully-rendered system prompt,\n# a deterministic job_id (so nb03 can resume), and a per-call seed.\nimport random\nfrom collections import Counter\n\nassert N_TOPICS_PER_EMOTION <= len(TOPICS_100), \"not enough topics to sample without replacement\"\n\ndef _job_id(*parts):\n    return hashlib.sha1(\"|\".join(map(str, parts)).encode(\"utf-8\")).hexdigest()[:10]\n\nrng = random.Random(SEED_BASE)\njobs = []\n\n# (1) Emotion stories — each emotion gets N_TOPICS_PER_EMOTION distinct topics.\nfor ei, emotion in enumerate(EMOTIONS_171):\n    for ti in rng.sample(range(len(TOPICS_100)), N_TOPICS_PER_EMOTION):\n        jobs.append({\n            \"kind\": \"emotion_story\",\n            \"job_id\": _job_id(\"emotion_story\", spec_hash, emotion, ti),\n            \"emotion\": emotion, \"emotion_idx\": ei,\n            \"topic\": TOPICS_100[ti], \"topic_idx\": ti,\n            \"n_outputs\": N_STORIES_PER_CALL,\n            \"system_prompt\": STORY_SYSTEM_PROMPT.format(\n                n_stories=N_STORIES_PER_CALL, topic=TOPICS_100[ti], emotion=emotion),\n            \"user\": spec[\"prompts\"][\"user_trigger\"],\n            \"seed\": SEED_BASE + ei * 1000 + ti,\n        })\n\n# (2) Neutral dialogues — one call per topic (the baseline contrast).\nfor ti, topic in enumerate(TOPICS_100):\n    jobs.append({\n        \"kind\": \"neutral_dialogue\",\n        \"job_id\": _job_id(\"neutral_dialogue\", spec_hash, ti),\n        \"emotion\": None,\n        \"topic\": topic, \"topic_idx\": ti,\n        \"n_outputs\": N_NEUTRAL_PER_CALL,\n        \"system_prompt\": NEUTRAL_DIALOGUE_SYSTEM_PROMPT.format(\n            n_stories=N_NEUTRAL_PER_CALL, topic=topic),\n        \"user\": spec[\"prompts\"][\"user_trigger\"],\n        \"seed\": SEED_BASE + 900_000 + ti,\n    })\n\n# (3) Optional emotional dialogues for nb08 (hidden-vs-expressed probe).\nif GENERATE_EMOTIONAL_DIALOGUES:\n    for k in range(N_EMOTION_DIALOGUE_PAIRS):\n        pe, ae = rng.choice(EMOTIONS_171), rng.choice(EMOTIONS_171)\n        ti = rng.randrange(len(TOPICS_100))\n        jobs.append({\n            \"kind\": \"emotional_dialogue\",\n            \"job_id\": _job_id(\"emotional_dialogue\", spec_hash, k),\n            \"person_emotion\": pe, \"ai_emotion\": ae,\n            \"topic\": TOPICS_100[ti], \"topic_idx\": ti,\n            \"n_outputs\": N_STORIES_PER_CALL,\n            \"system_prompt\": EMOTIONAL_DIALOGUE_SYSTEM_PROMPT.format(\n                n_stories=N_STORIES_PER_CALL, topic=TOPICS_100[ti],\n                person_emotion=pe, ai_emotion=ae),\n            \"user\": spec[\"prompts\"][\"user_trigger\"],\n            \"seed\": SEED_BASE + 800_000 + k,\n        })\n\n# Stamp every record with provenance so a stray prompts.jsonl is self-describing.\nfor j in jobs:\n    j[\"spec_hash\"] = spec_hash\n    j[\"generator_model\"] = GENERATOR_MODEL\n\nprompts_path = DATA_DIR / \"prompts.jsonl\"\nwith prompts_path.open(\"w\", encoding=\"utf-8\") as f:\n    for j in jobs:\n        f.write(json.dumps(j, ensure_ascii=False) + \"\\n\")\n\nkind_counts = Counter(j[\"kind\"] for j in jobs)\nmanifest = {\n    \"spec_hash\": spec_hash,\n    \"generator_model\": GENERATOR_MODEL,\n    \"n_jobs\": len(jobs),\n    \"n_outputs_expected\": sum(j[\"n_outputs\"] for j in jobs),\n    \"kind_counts\": dict(kind_counts),\n    \"prompts_file\": str(prompts_path),\n}\n(DATA_DIR / \"prompts_manifest.json\").write_text(json.dumps(manifest, indent=2))\n\nprint(f\"wrote {len(jobs):,} prompt jobs → {prompts_path}\")\nfor k, c in sorted(kind_counts.items()):\n    print(f\"  {k:<20} {c:>5} jobs\")\nprint(f\"expected total outputs: {manifest['n_outputs_expected']:,}\")\nprint()\nprint(\"─ example job (truncated) ─\")\nex = dict(jobs[0]); ex[\"system_prompt\"] = ex[\"system_prompt\"][:160] + \" …\"\nprint(json.dumps(ex, indent=2))\n",
++   "source": [
++    "# \u2500\u2500 Materialise the concrete prompt set \u2192 prompts.jsonl \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n",
++    "# nb02 freezes *what to ask*; nb03 only has to load this file and decode.\n",
++    "# Each line is one generation \"call\" with the fully-rendered system prompt,\n",
++    "# a deterministic job_id (so nb03 can resume), and a per-call seed.\n",
++    "import random\n",
++    "from collections import Counter\n",
++    "\n",
++    "assert N_TOPICS_PER_EMOTION <= len(TOPICS_100), \"not enough topics to sample without replacement\"\n",
++    "\n",
++    "def _job_id(*parts):\n",
++    "    return hashlib.sha1(\"|\".join(map(str, parts)).encode(\"utf-8\")).hexdigest()[:10]\n",
++    "\n",
++    "rng = random.Random(SEED_BASE)\n",
++    "jobs = []\n",
++    "\n",
++    "# (1) Emotion stories \u2014 ONE shared topic subset for ALL emotions (topic-matched:\n",
++    "# per-emotion sampling confounds emotion with topic identity; see press-office review)\n",
++    "SHARED_TOPICS = sorted(rng.sample(range(len(TOPICS_100)), N_TOPICS_PER_EMOTION))\n",
++    "for ei, emotion in enumerate(EMOTIONS_171):\n",
++    "    for ti in SHARED_TOPICS:\n",
++    "        jobs.append({\n",
++    "            \"kind\": \"emotion_story\",\n",
++    "            \"job_id\": _job_id(\"emotion_story\", spec_hash, emotion, ti),\n",
++    "            \"emotion\": emotion, \"emotion_idx\": ei,\n",
++    "            \"topic\": TOPICS_100[ti], \"topic_idx\": ti,\n",
++    "            \"n_outputs\": N_STORIES_PER_CALL,\n",
++    "            \"system_prompt\": STORY_SYSTEM_PROMPT.format(\n",
++    "                n_stories=N_STORIES_PER_CALL, topic=TOPICS_100[ti], emotion=emotion),\n",
++    "            \"user\": spec[\"prompts\"][\"user_trigger\"],\n",
++    "            \"seed\": SEED_BASE + ei * 1000 + ti,\n",
++    "        })\n",
++    "\n",
++    "# (2) Neutral dialogues \u2014 one call per topic (the baseline contrast).\n",
++    "for ti, topic in enumerate(TOPICS_100):\n",
++    "    jobs.append({\n",
++    "        \"kind\": \"neutral_dialogue\",\n",
++    "        \"job_id\": _job_id(\"neutral_dialogue\", spec_hash, ti),\n",
++    "        \"emotion\": None,\n",
++    "        \"topic\": topic, \"topic_idx\": ti,\n",
++    "        \"n_outputs\": N_NEUTRAL_PER_CALL,\n",
++    "        \"system_prompt\": NEUTRAL_DIALOGUE_SYSTEM_PROMPT.format(\n",
++    "            n_stories=N_NEUTRAL_PER_CALL, topic=topic),\n",
++    "        \"user\": spec[\"prompts\"][\"user_trigger\"],\n",
++    "        \"seed\": SEED_BASE + 900_000 + ti,\n",
++    "    })\n",
++    "\n",
++    "# (3) Optional emotional dialogues for nb08 (hidden-vs-expressed probe).\n",
++    "if GENERATE_EMOTIONAL_DIALOGUES:\n",
++    "    for k in range(N_EMOTION_DIALOGUE_PAIRS):\n",
++    "        pe, ae = rng.choice(EMOTIONS_171), rng.choice(EMOTIONS_171)\n",
++    "        ti = rng.randrange(len(TOPICS_100))\n",
++    "        jobs.append({\n",
++    "            \"kind\": \"emotional_dialogue\",\n",
++    "            \"job_id\": _job_id(\"emotional_dialogue\", spec_hash, k),\n",
++    "            \"person_emotion\": pe, \"ai_emotion\": ae,\n",
++    "            \"topic\": TOPICS_100[ti], \"topic_idx\": ti,\n",
++    "            \"n_outputs\": N_STORIES_PER_CALL,\n",
++    "            \"system_prompt\": EMOTIONAL_DIALOGUE_SYSTEM_PROMPT.format(\n",
++    "                n_stories=N_STORIES_PER_CALL, topic=TOPICS_100[ti],\n",
++    "                person_emotion=pe, ai_emotion=ae),\n",
++    "            \"user\": spec[\"prompts\"][\"user_trigger\"],\n",
++    "            \"seed\": SEED_BASE + 800_000 + k,\n",
++    "        })\n",
++    "\n",
++    "# Stamp every record with provenance so a stray prompts.jsonl is self-describing.\n",
++    "for j in jobs:\n",
++    "    j[\"spec_hash\"] = spec_hash\n",
++    "    j[\"generator_model\"] = GENERATOR_MODEL\n",
++    "\n",
++    "prompts_path = DATA_DIR / \"prompts.jsonl\"\n",
++    "with prompts_path.open(\"w\", encoding=\"utf-8\") as f:\n",
++    "    for j in jobs:\n",
++    "        f.write(json.dumps(j, ensure_ascii=False) + \"\\n\")\n",
++    "\n",
++    "kind_counts = Counter(j[\"kind\"] for j in jobs)\n",
++    "manifest = {\n",
++    "    \"spec_hash\": spec_hash,\n",
++    "    \"generator_model\": GENERATOR_MODEL,\n",
++    "    \"n_jobs\": len(jobs),\n",
++    "    \"n_outputs_expected\": sum(j[\"n_outputs\"] for j in jobs),\n",
++    "    \"kind_counts\": dict(kind_counts),\n",
++    "    \"prompts_file\": str(prompts_path),\n",
++    "}\n",
++    "(DATA_DIR / \"prompts_manifest.json\").write_text(json.dumps(manifest, indent=2))\n",
++    "\n",
++    "print(f\"wrote {len(jobs):,} prompt jobs \u2192 {prompts_path}\")\n",
++    "for k, c in sorted(kind_counts.items()):\n",
++    "    print(f\"  {k:<20} {c:>5} jobs\")\n",
++    "print(f\"expected total outputs: {manifest['n_outputs_expected']:,}\")\n",
++    "print()\n",
++    "print(\"\u2500 example job (truncated) \u2500\")\n",
++    "ex = dict(jobs[0]); ex[\"system_prompt\"] = ex[\"system_prompt\"][:160] + \" \u2026\"\n",
++    "print(json.dumps(ex, indent=2))\n"
++   ],
+    "metadata": {},
+    "execution_count": null,
+    "outputs": []
+@@ -837,7 +948,7 @@
+   {
+    "cell_type": "markdown",
+    "metadata": {},
+-   "source": "## 9 — Next\n\nThis notebook leaves two artifacts in `WORK_DIR/data/processed/`:\n\n- `dataset_spec.json` — the frozen recipe (emotions, topics, prompt templates, decoding knobs, budget), keyed by `spec_hash`.\n- `prompts.jsonl` (+ `prompts_manifest.json`) — the materialised generation calls.\n\n`03_story_generation.ipynb` consumes both. It will:\n\n1. Resolve the same `WORK_DIR` (Drive on Colab / `EMOVEC_WORK_DIR` on HPC) and load `dataset_spec.json` + `prompts.jsonl`.\n2. Load `GENERATOR_MODEL` (overridable via `EMOVEC_GENERATOR_MODEL`) with sensible precision: bf16/fp16 on a big GPU, 4-bit (bitsandbytes) on a T4, `device_map=\"auto\"` across multiple GPUs on HPC.\n3. Iterate the prompt jobs in **batches**, decoding `n_outputs` per call, skipping any `job_id` already written (resume).\n4. Parse multi-story / multi-dialogue completions into individual segments (keeping the raw completion too), and rewrite `Person:`/`AI:` → `Human:`/`Assistant:` in dialogues, per Anthropic.\n5. Append results to `data/processed/stories/{spec_hash}/{model}/stories.jsonl`.\n\n`05_emotion_vectors.ipynb` will then:\n\n1. Compute `mean_emotion_activations` (per emotion) and `mean_neutral_dialogue_activations` (across the 100 topics).\n2. **Crucial step that's easy to miss:** PCA over the neutral-dialogue activations; keep top-k components (k = enough for 50 % explained variance); **project those components out** of each diff-of-means emotion vector. This removes the generic story-vs-dialogue style direction so the resulting vectors capture emotional content cleanly.\n3. Save 171 corrected vectors per layer.\n\nIf anything in this notebook's spec changes (model, prompt, budget), `spec_hash` shifts, every `job_id` shifts, and nb03 treats it as a fresh run.\n\n**Open follow-ups for this stage** (tracked in `meta/TODO.md`):\n\n- ✅ Canonical 171-emotion list, 100 topics, and prompts (story / neutral / emotional dialogue) in place verbatim.\n- ✅ Concrete prompt set materialised to `prompts.jsonl` for nb03.\n- Qualitative spot-check (done in nb03): pick 5 emotions, generate one call each, confirm the output reads as the intended emotion and **doesn't** name it.\n- Decide pooling rule for nb04: full passage vs. emotion-evoking sentence span. Log decision in `meta/DECISIONS.md`.",
++   "source": "## 9 \u2014 Next\n\nThis notebook leaves two artifacts in `WORK_DIR/data/processed/`:\n\n- `dataset_spec.json` \u2014 the frozen recipe (emotions, topics, prompt templates, decoding knobs, budget), keyed by `spec_hash`.\n- `prompts.jsonl` (+ `prompts_manifest.json`) \u2014 the materialised generation calls.\n\n`03_story_generation.ipynb` consumes both. It will:\n\n1. Resolve the same `WORK_DIR` (Drive on Colab / `EMOVEC_WORK_DIR` on HPC) and load `dataset_spec.json` + `prompts.jsonl`.\n2. Load `GENERATOR_MODEL` (overridable via `EMOVEC_GENERATOR_MODEL`) with sensible precision: bf16/fp16 on a big GPU, 4-bit (bitsandbytes) on a T4, `device_map=\"auto\"` across multiple GPUs on HPC.\n3. Iterate the prompt jobs in **batches**, decoding `n_outputs` per call, skipping any `job_id` already written (resume).\n4. Parse multi-story / multi-dialogue completions into individual segments (keeping the raw completion too), and rewrite `Person:`/`AI:` \u2192 `Human:`/`Assistant:` in dialogues, per Anthropic.\n5. Append results to `data/processed/stories/{spec_hash}/{model}/stories.jsonl`.\n\n`05_emotion_vectors.ipynb` will then:\n\n1. Compute `mean_emotion_activations` (per emotion) and `mean_neutral_dialogue_activations` (across the 100 topics).\n2. **Crucial step that's easy to miss:** PCA over the neutral-dialogue activations; keep top-k components (k = enough for 50 % explained variance); **project those components out** of each diff-of-means emotion vector. This removes the generic story-vs-dialogue style direction so the resulting vectors capture emotional content cleanly.\n3. Save 171 corrected vectors per layer.\n\nIf anything in this notebook's spec changes (model, prompt, budget), `spec_hash` shifts, every `job_id` shifts, and nb03 treats it as a fresh run.\n\n**Open follow-ups for this stage** (tracked in `meta/TODO.md`):\n\n- \u2705 Canonical 171-emotion list, 100 topics, and prompts (story / neutral / emotional dialogue) in place verbatim.\n- \u2705 Concrete prompt set materialised to `prompts.jsonl` for nb03.\n- Qualitative spot-check (done in nb03): pick 5 emotions, generate one call each, confirm the output reads as the intended emotion and **doesn't** name it.\n- Decide pooling rule for nb04: full passage vs. emotion-evoking sentence span. Log decision in `meta/DECISIONS.md`.",
+    "id": "124b324c"
+   }
+  ],
+diff --git a/notebooks/06_validation_held_out.ipynb b/notebooks/06_validation_held_out.ipynb
+index 0637d0b..0548e5f 100644
+--- a/notebooks/06_validation_held_out.ipynb
++++ b/notebooks/06_validation_held_out.ipynb
+@@ -313,7 +313,7 @@
+     "go_results, go_error = None, None\n",
+     "try:\n",
+     "    from datasets import load_dataset\n",
+-    "    ds = load_dataset(\"go_emotions\", \"simplified\", split=\"test\")\n",
++    "    ds = load_dataset(\"google-research-datasets/go_emotions\", \"simplified\", split=\"test\")\n",
+     "    go_names = ds.features[\"labels\"].feature.names      # 28 incl. neutral\n",
+     "    emo_to_idx = {e: i for i, e in enumerate(EMOTIONS)}\n",
+     "\n",
+diff --git a/scripts/extract_features.py b/scripts/extract_features.py
+index 1502d2d..d0043bf 100755
+--- a/scripts/extract_features.py
++++ b/scripts/extract_features.py
+@@ -55,7 +55,7 @@ TARGET_MENU = [
+     ("meta-llama/Llama-3.1-8B-Instruct",  "8B, gated — needs HF_TOKEN"),
+     ("mistralai/Mistral-7B-Instruct-v0.3", "7B cross-family check"),
+ ]
+-BASELINE_CHOICES = ["auto", "neutral_mean", "project_pcs", "global_mean", "none"]
++BASELINE_CHOICES = ["auto", "neutral_mean", "project_pcs", "global_mean", "none", "paper"]
+ 
+ 
+ # ════════════════════════════════════════════════════════════════════════════
+@@ -101,6 +101,11 @@ def build_emotion_vectors(class_means, neutral_mean, global_mean, mode, neutral_
+     M = np.stack([class_means[e] for e in emotions], axis=0)   # (E, n_layers, d)
+     if mode == "none":
+         V = M
++    elif mode == "paper":   # Anthropic recipe: subtract cross-emotion mean, project out neutral PCs
++        V = M - M.mean(axis=0, keepdims=True)
++        if neutral_pcs is not None:
++            V = np.stack([project_out_pcs(V[:, L, :], neutral_pcs[L])
++                          for L in range(V.shape[1])], axis=1)
+     elif mode == "global_mean":
+         V = M - global_mean[None]
+     else:   # neutral_mean / project_pcs both centre on neutral first
+@@ -159,7 +164,8 @@ def discover_stories(data_dir: Path, explicit: str, logger: RunLogger) -> Path:
+ def flatten_items(records, min_tokens, max_seg_per_emotion):
+     items = []
+     for r in records:
+-        segs = r.get("segments") or ([r["raw"]] if r.get("raw") else [])
++        segs = (r["segments"] if "segments" in r
++                else ([r["raw"]] if r.get("raw") else []))
+         for si, seg in enumerate(segs):
+             seg = (seg or "").strip()
+             if len(seg.split()) < min_tokens:
+@@ -285,6 +291,7 @@ def parse_args(argv=None):
+     p.add_argument("--device-map")
+     p.add_argument("--demo", type=int, choices=[0, 1])
+     p.add_argument("--pool", choices=["mean", "last"])
++    p.add_argument("--skip-tokens", type=int)
+     p.add_argument("--skip-first", dest="skip_first", action="store_const", const=True, default=None)
+     p.add_argument("--no-skip-first", dest="skip_first", action="store_const", const=False)
+     p.add_argument("--cluster-layer")
+@@ -332,6 +339,7 @@ def main(argv=None):
+                          "EMOVEC_DEMO", True)
+     pool = resolver.choice("pool", args.pool, "EMOVEC_POOL", ["mean", "last"], "mean")
+     skip_first = resolver.flag("skip_first", args.skip_first, "EMOVEC_SKIP_FIRST", True)
++    skip_tokens = int(resolver.value("skip_tokens", args.skip_tokens, "EMOVEC_SKIP_TOKENS", 1))
+     cluster_layer = resolver.value("cluster_layer", args.cluster_layer,
+                                    "EMOVEC_CLUSTER_LAYER", "mid")
+     cum_layer = resolver.value("cum_layer", args.cum_layer, "EMOVEC_CUM_LAYER", "mid")
+@@ -451,9 +459,10 @@ def main(argv=None):
+     t0 = time.time()
+     for i, it in enumerate(items):
+         resid, toks = extract_resid(it["text"])
+-        if skip_first and resid.shape[1] > 1:           # drop token-0 attention sink
+-            resid = resid[:, 1:, :]
+-            toks = toks[1:]
++        if skip_first and resid.shape[1] > 1:           # drop attention sink / prompt onset
++            k = skip_tokens if resid.shape[1] > skip_tokens + 8 else 1
++            resid = resid[:, k:, :]
++            toks = toks[k:]
+         n_tokens[i] = resid.shape[1]
+         X[i] = pool_segment(resid, pool)
+         if i in ts_pick:
+@@ -487,19 +496,24 @@ def main(argv=None):
+     mode = baseline
+     if mode == "auto":
+         mode = "neutral_mean" if neutral_idx else "global_mean"
+-    if mode in ("neutral_mean", "project_pcs") and not neutral_idx:
++    if mode in ("neutral_mean", "project_pcs", "paper") and not neutral_idx:
+         logger.log("no neutral segments → falling back to global_mean baseline")
+         mode = "global_mean"
+ 
+     neutral_pcs = None
+-    if mode == "project_pcs":
++    if mode in ("project_pcs", "paper"):
+         from sklearn.decomposition import PCA
+         Xn = X[neutral_idx]
+         neutral_pcs = []
+         for L in range(n_layers):
+-            kk = min(baseline_pcs, max(1, Xn.shape[0] - 1))
+-            neutral_pcs.append(
+-                PCA(n_components=kk).fit(Xn[:, L, :] - Xn[:, L, :].mean(0)).components_)
++            Xc = Xn[:, L, :] - Xn[:, L, :].mean(0)
++            if baseline_pcs == 0:   # paper rule: as many PCs as explain 50% of variance
++                fit = PCA(n_components=min(Xn.shape[0] - 1, 64)).fit(Xc)
++                kk = int(np.searchsorted(np.cumsum(fit.explained_variance_ratio_), 0.5)) + 1
++                neutral_pcs.append(fit.components_[:kk])
++            else:
++                kk = min(baseline_pcs, max(1, Xn.shape[0] - 1))
++                neutral_pcs.append(PCA(n_components=kk).fit(Xc).components_)
+ 
+     emotions, V = build_emotion_vectors(class_means, neutral_mean, global_mean, mode, neutral_pcs)
+     logger.log(f"baseline : {mode}  (kinds: {baseline_kinds or 'none'})")
+diff --git a/scripts/generate_dataset.py b/scripts/generate_dataset.py
+index 91e6cb6..4624f14 100755
+--- a/scripts/generate_dataset.py
++++ b/scripts/generate_dataset.py
+@@ -264,11 +264,12 @@ _HEADER_RE = re.compile(
+     r"(?im)^[ \t]*\**\[?\s*(?:story|dialogue|example|passage)\s*#?\s*\d+\s*\]?\**"
+     r"[ \t]*[:.)\-]?[ \t]*")
+ _NUM_RE = re.compile(r"(?im)^[ \t]*\d+[ \t]*[.)][ \t]+")
++_TAG_RE = re.compile(r"(?im)^[ \t]*<\s*NEW\s+(?:STORY|DIALOGUE)\s*>[ \t]*$")
+ 
+ 
+ def split_segments(text: str):
+     text = text.strip()
+-    for rx in (_HEADER_RE, _NUM_RE):
++    for rx in (_TAG_RE, _HEADER_RE, _NUM_RE):
+         parts = [p.strip() for p in rx.split(text) if p.strip()]
+         if len(parts) >= 2:
+             return parts
