@@ -11,8 +11,6 @@ EmoVecLLM/
 lens/
 data/
 
-# separate follow-up project, not part of this submission
-gauge/
 
 # scratch run outputs; the published ones live in confirm_8b/ and confirm_32b/
 harness/runs/

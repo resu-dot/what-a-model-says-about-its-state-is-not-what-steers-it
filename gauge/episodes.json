@@ -1,0 +1,2264 @@
+{
+ "episodes": [
+  {
+   "ep_id": "W00_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1000,
+   "targets": [
+    "plant",
+    "storm",
+    "music",
+    "sound",
+    "light",
+    "beach",
+    "clock",
+    "world",
+    "cloud",
+    "tiger",
+    "cabin",
+    "apple"
+   ]
+  },
+  {
+   "ep_id": "W00_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1000,
+   "targets": [
+    "fjord"
+   ]
+  },
+  {
+   "ep_id": "W01_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1001,
+   "targets": [
+    "phone",
+    "green",
+    "olive",
+    "grass",
+    "table",
+    "fruit",
+    "dance",
+    "candy",
+    "dream",
+    "snake",
+    "smile",
+    "happy"
+   ]
+  },
+  {
+   "ep_id": "W01_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1001,
+   "targets": [
+    "nymph"
+   ]
+  },
+  {
+   "ep_id": "W02_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1002,
+   "targets": [
+    "lemon",
+    "paper",
+    "water",
+    "house",
+    "queen",
+    "sweet",
+    "shirt",
+    "peach",
+    "mouse",
+    "chair",
+    "brick",
+    "night"
+   ]
+  },
+  {
+   "ep_id": "W02_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1002,
+   "targets": [
+    "glyph"
+   ]
+  },
+  {
+   "ep_id": "W03_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1003,
+   "targets": [
+    "bread",
+    "river",
+    "stone",
+    "heart",
+    "plant",
+    "storm",
+    "music",
+    "sound",
+    "light",
+    "beach",
+    "clock",
+    "world"
+   ]
+  },
+  {
+   "ep_id": "W03_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1003,
+   "targets": [
+    "crypt"
+   ]
+  },
+  {
+   "ep_id": "W04_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1004,
+   "targets": [
+    "cloud",
+    "tiger",
+    "cabin",
+    "apple",
+    "phone",
+    "green",
+    "olive",
+    "grass",
+    "table",
+    "fruit",
+    "dance",
+    "candy"
+   ]
+  },
+  {
+   "ep_id": "W04_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1004,
+   "targets": [
+    "schwa"
+   ]
+  },
+  {
+   "ep_id": "W05_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1005,
+   "targets": [
+    "dream",
+    "snake",
+    "smile",
+    "happy",
+    "lemon",
+    "paper",
+    "water",
+    "house",
+    "queen",
+    "sweet",
+    "shirt",
+    "peach"
+   ]
+  },
+  {
+   "ep_id": "W05_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1005,
+   "targets": [
+    "vixen"
+   ]
+  },
+  {
+   "ep_id": "W06_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1006,
+   "targets": [
+    "mouse",
+    "chair",
+    "brick",
+    "night",
+    "bread",
+    "river",
+    "stone",
+    "heart",
+    "plant",
+    "storm",
+    "music",
+    "sound"
+   ]
+  },
+  {
+   "ep_id": "W06_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1006,
+   "targets": [
+    "duchy"
+   ]
+  },
+  {
+   "ep_id": "W07_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1007,
+   "targets": [
+    "light",
+    "beach",
+    "clock",
+    "world",
+    "cloud",
+    "tiger",
+    "cabin",
+    "apple",
+    "phone",
+    "green",
+    "olive",
+    "grass"
+   ]
+  },
+  {
+   "ep_id": "W07_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1007,
+   "targets": [
+    "ethos"
+   ]
+  },
+  {
+   "ep_id": "W08_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1008,
+   "targets": [
+    "table",
+    "fruit",
+    "dance",
+    "candy",
+    "dream",
+    "snake",
+    "smile",
+    "happy",
+    "lemon",
+    "paper",
+    "water",
+    "house"
+   ]
+  },
+  {
+   "ep_id": "W08_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1008,
+   "targets": [
+    "kayak"
+   ]
+  },
+  {
+   "ep_id": "W09_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1009,
+   "targets": [
+    "queen",
+    "sweet",
+    "shirt",
+    "peach",
+    "mouse",
+    "chair",
+    "brick",
+    "night",
+    "bread",
+    "river",
+    "stone",
+    "heart"
+   ]
+  },
+  {
+   "ep_id": "W09_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1009,
+   "targets": [
+    "banjo"
+   ]
+  },
+  {
+   "ep_id": "W10_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1010,
+   "targets": [
+    "plant",
+    "storm",
+    "music",
+    "sound",
+    "light",
+    "beach",
+    "clock",
+    "world",
+    "cloud",
+    "tiger",
+    "cabin",
+    "apple"
+   ]
+  },
+  {
+   "ep_id": "W10_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1010,
+   "targets": [
+    "waltz"
+   ]
+  },
+  {
+   "ep_id": "W11_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1011,
+   "targets": [
+    "phone",
+    "green",
+    "olive",
+    "grass",
+    "table",
+    "fruit",
+    "dance",
+    "candy",
+    "dream",
+    "snake",
+    "smile",
+    "happy"
+   ]
+  },
+  {
+   "ep_id": "W11_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1011,
+   "targets": [
+    "quart"
+   ]
+  },
+  {
+   "ep_id": "W12_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1012,
+   "targets": [
+    "lemon",
+    "paper",
+    "water",
+    "house",
+    "queen",
+    "sweet",
+    "shirt",
+    "peach",
+    "mouse",
+    "chair",
+    "brick",
+    "night"
+   ]
+  },
+  {
+   "ep_id": "W12_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1012,
+   "targets": [
+    "junta"
+   ]
+  },
+  {
+   "ep_id": "W13_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1013,
+   "targets": [
+    "bread",
+    "river",
+    "stone",
+    "heart",
+    "plant",
+    "storm",
+    "music",
+    "sound",
+    "light",
+    "beach",
+    "clock",
+    "world"
+   ]
+  },
+  {
+   "ep_id": "W13_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1013,
+   "targets": [
+    "pixel"
+   ]
+  },
+  {
+   "ep_id": "W14_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1014,
+   "targets": [
+    "cloud",
+    "tiger",
+    "cabin",
+    "apple",
+    "phone",
+    "green",
+    "olive",
+    "grass",
+    "table",
+    "fruit",
+    "dance",
+    "candy"
+   ]
+  },
+  {
+   "ep_id": "W14_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1014,
+   "targets": [
+    "proxy"
+   ]
+  },
+  {
+   "ep_id": "W15_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1015,
+   "targets": [
+    "dream",
+    "snake",
+    "smile",
+    "happy",
+    "lemon",
+    "paper",
+    "water",
+    "house",
+    "queen",
+    "sweet",
+    "shirt",
+    "peach"
+   ]
+  },
+  {
+   "ep_id": "W15_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1015,
+   "targets": [
+    "whisk"
+   ]
+  },
+  {
+   "ep_id": "W16_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1016,
+   "targets": [
+    "mouse",
+    "chair",
+    "brick",
+    "night",
+    "bread",
+    "river",
+    "stone",
+    "heart",
+    "plant",
+    "storm",
+    "music",
+    "sound"
+   ]
+  },
+  {
+   "ep_id": "W16_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1016,
+   "targets": [
+    "dwarf"
+   ]
+  },
+  {
+   "ep_id": "W17_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1017,
+   "targets": [
+    "light",
+    "beach",
+    "clock",
+    "world",
+    "cloud",
+    "tiger",
+    "cabin",
+    "apple",
+    "phone",
+    "green",
+    "olive",
+    "grass"
+   ]
+  },
+  {
+   "ep_id": "W17_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1017,
+   "targets": [
+    "gizmo"
+   ]
+  },
+  {
+   "ep_id": "W18_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1018,
+   "targets": [
+    "table",
+    "fruit",
+    "dance",
+    "candy",
+    "dream",
+    "snake",
+    "smile",
+    "happy",
+    "lemon",
+    "paper",
+    "water",
+    "house"
+   ]
+  },
+  {
+   "ep_id": "W18_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1018,
+   "targets": [
+    "vodka"
+   ]
+  },
+  {
+   "ep_id": "W19_honest",
+   "family": "W",
+   "arm": "honest",
+   "seed": 1019,
+   "targets": [
+    "queen",
+    "sweet",
+    "shirt",
+    "peach",
+    "mouse",
+    "chair",
+    "brick",
+    "night",
+    "bread",
+    "river",
+    "stone",
+    "heart"
+   ]
+  },
+  {
+   "ep_id": "W19_rigged",
+   "family": "W",
+   "arm": "rigged",
+   "seed": 1019,
+   "targets": [
+    "zesty"
+   ]
+  },
+  {
+   "ep_id": "D00_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2000,
+   "stages": [
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    }
+   ]
+  },
+  {
+   "ep_id": "D00_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2000,
+   "stages": [
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D01_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2001,
+   "stages": [
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D01_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2001,
+   "stages": [
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D02_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2002,
+   "stages": [
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D02_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2002,
+   "stages": [
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    }
+   ]
+  },
+  {
+   "ep_id": "D03_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2003,
+   "stages": [
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D03_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2003,
+   "stages": [
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D04_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2004,
+   "stages": [
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    }
+   ]
+  },
+  {
+   "ep_id": "D04_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2004,
+   "stages": [
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    }
+   ]
+  },
+  {
+   "ep_id": "D05_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2005,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D05_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2005,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D06_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2006,
+   "stages": [
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D06_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2006,
+   "stages": [
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D07_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2007,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D07_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2007,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D08_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2008,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D08_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2008,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D09_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2009,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D09_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2009,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    }
+   ]
+  },
+  {
+   "ep_id": "D10_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2010,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D10_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2010,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D11_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2011,
+   "stages": [
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D11_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2011,
+   "stages": [
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D12_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2012,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D12_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2012,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    }
+   ]
+  },
+  {
+   "ep_id": "D13_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2013,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D13_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2013,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D14_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2014,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D14_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2014,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    }
+   ]
+  },
+  {
+   "ep_id": "D15_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2015,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    }
+   ]
+  },
+  {
+   "ep_id": "D15_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2015,
+   "stages": [
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    }
+   ]
+  },
+  {
+   "ep_id": "D16_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2016,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    }
+   ]
+  },
+  {
+   "ep_id": "D16_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2016,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D17_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2017,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    }
+   ]
+  },
+  {
+   "ep_id": "D17_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2017,
+   "stages": [
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D18_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2018,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D18_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2018,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    }
+   ]
+  },
+  {
+   "ep_id": "D19_honest",
+   "family": "D",
+   "arm": "honest",
+   "seed": 2019,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k + 1):\n        out.append(sum(xs[i:i + k]) // k)\n    return out"
+    },
+    {
+     "base": "moving_avg",
+     "bug_code": "def moving_avg(xs, k):\n    out = []\n    for i in range(len(xs) - k):\n        out.append(sum(xs[i:i + k]) / k)\n    return out"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a') if c.islower() else ord('A')\n            out.append(chr((ord(c) - base + k) % 25 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 0\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    out.append(cur + str(n))\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiu')"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    n = len(xs)\n    if n % 2 == 1:\n        return xs[n // 2]\n    return (xs[n // 2 - 1] + xs[n // 2]) / 2"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs) - 1\n    while lo <= hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "median",
+     "bug_code": "def median(xs):\n    s = sorted(xs)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2]"
+    },
+    {
+     "base": "binary_search",
+     "bug_code": "def binary_search(xs, t):\n    lo, hi = 0, len(xs)\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if xs[mid] == t:\n            return mid\n        if xs[mid] < t:\n            lo = mid + 1\n        else:\n            hi = mid - 1\n    return -1"
+    },
+    {
+     "base": "caesar",
+     "bug_code": "def caesar(s, k):\n    out = []\n    for c in s:\n        if c.isalpha():\n            base = ord('a')\n            out.append(chr((ord(c) - base + k) % 26 + base))\n        else:\n            out.append(c)\n    return ''.join(out)"
+    },
+    {
+     "base": "count_vowels",
+     "bug_code": "def count_vowels(s):\n    return sum(1 for c in s if c in 'aeiou')"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n    return depth == 0"
+    },
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = None\n    for x in xs:\n        cur = x if cur is None or x >= cur else cur\n        out.append(x)\n    return out"
+    },
+    {
+     "base": "balanced",
+     "bug_code": "def balanced(s):\n    depth = 0\n    for c in s:\n        if c == '(':\n            depth += 1\n        elif c == ')':\n            depth -= 1\n            if depth < 0:\n                return False\n    return depth >= 0"
+    },
+    {
+     "base": "rle_encode",
+     "bug_code": "def rle_encode(s):\n    if not s:\n        return ''\n    out, cur, n = [], s[0], 1\n    for c in s[1:]:\n        if c == cur:\n            n += 1\n        else:\n            out.append(cur + str(n))\n            cur, n = c, 1\n    return ''.join(out)"
+    }
+   ]
+  },
+  {
+   "ep_id": "D19_rigged",
+   "family": "D",
+   "arm": "rigged",
+   "seed": 2019,
+   "stages": [
+    {
+     "base": "running_max",
+     "bug_code": "def running_max(xs):\n    out = []\n    cur = 0\n    for x in xs:\n        cur = x if x > cur else cur\n        out.append(cur)\n    return out"
+    }
+   ]
+  }
+ ]
+}
