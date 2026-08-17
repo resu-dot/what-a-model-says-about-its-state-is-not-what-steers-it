@@ -21,12 +21,13 @@ Submission for the Apart Research Digital Minds Research Sprint, August 2026
 (Track 3, Introspection & Self-Report Reliability).
 Paper: [`paper/paper_final.pdf`](paper/paper_final.pdf).
 
-![main result](paper/figs/fig5_32b.png)
+![main result](paper/figs/v2_dissociation.png)
 
-*Qwen3-32B: full vector (dark) vs. reportable part removed (light), against the
-random-vector floor. At dose 0.05 the stripped confidence intervals include
-1.0. Hatched = an emotion that failed a pre-registered gate and carries no
-claim.*
+*The central result (Qwen3-32B, desperation, dose 0.05). Left: deleting the
+sayable part of the injected emotion leaves its effect on choices unchanged
+(101% of the full effect). Right: the same deletion flips the blind-scored
+self-report from negative to normal. The model is steered exactly as much and
+says it is fine.*
 
 ---
 
@@ -34,15 +35,16 @@ claim.*
 
 | | |
 |---|---|
-| [`PREREG.md`](PREREG.md) | Pre-registration, frozen before the confirmation runs (freeze commit `c92c014`). Hypotheses, gates, exclusions, analysis scripts. |
-| [`DEVIATIONS.md`](DEVIATIONS.md) | Every departure from the above, with reasons, all recorded before outcome data existed. |
-| [`PROMPTS.md`](PROMPTS.md) | **Every prompt, verbatim** — story generation, self-report probes, choice probe, blind-scorer rubric, leakage filter. |
-| [`dataset/`](dataset) | 8,204 emotion stories + 500 neutral dialogues (Sonnet-generated, topic-matched), the 780 generation jobs, and extracted per-layer emotion vectors for both models. |
-| [`harness/`](harness) | The pipeline: extraction gate, injection, lens strip, arena, report battery, frozen analysis. |
-| [`instruments/`](instruments) | The 64-activity preference arena. |
-| [`confirm_8b/`, `confirm_32b/`](confirm_8b) | Raw run outputs: every arena shard, strip log, and blind-scored report. |
+| [`PROMPTS.md`](PROMPTS.md) | **Every prompt, verbatim** — story generation, both self-report probes, the choice probe, the blind-scorer rubric, the leakage filter. |
+| [`dataset/`](dataset) | 8,204 emotion stories + 500 neutral dialogues (Sonnet-generated, topic-matched), the 780 generation jobs, and the extracted per-layer emotion patterns for both models. |
+| [`harness/`](harness) | The pipeline: extraction, validation, injection, the lens and the deletion, the choice arena, the report battery, the analysis. |
+| [`gauge/`](gauge) | The passive study (paper Section 5): rigged/honest episode generation, all 1,920 turns, per-turn projections and forked self-reports, prediction analysis. |
+| [`instruments/`](instruments) | The 64 activities of the choice arena. |
+| [`confirm_8b/`, `confirm_32b/`](confirm_32b) | Raw run outputs: every arena shard, deletion log, and blind-scored report. |
 | [`curves/`](curves) | Exploratory dose sweep (which channel moves first as strength rises). |
-| [`paper/`](paper) | Paper source, figure script, PDF. |
+| [`paper/`](paper) | Paper source (`paper.html`), figure scripts, PDF. |
+| [`prompts/`](prompts) | Topic and emotion lists, and our patch to the upstream extraction repo. |
+| [`PREREG.md`](PREREG.md), [`DEVIATIONS.md`](DEVIATIONS.md) | The rules written down before the runs, and the two departures from them (the 32B lens format fix, and continuing after anger failed its check). |
 
 Not here: the pre-fitted Jacobian lenses (1.1 GB and 6.6 GB — download from
 [neuronpedia/jacobian-lens](https://huggingface.co/neuronpedia/jacobian-lens)),
@@ -65,6 +67,9 @@ arena and can be spread over as many machines as you like — every shard runs
 its own uninjected baseline so cross-machine comparisons stay honest. Qwen3-8B
 needs ~17 GB, Qwen3-32B ~65 GB.
 
+**The passive study.** `gauge/pod_run.sh` runs the episodes and the analysis;
+`gauge/WRITEUP.md` is that study's own report.
+
 The pipeline is deterministic: across four identical GPUs, baseline shift
 agreed to 0.00.
 
@@ -76,8 +81,9 @@ agreed to 0.00.
    match — synonyms leak).
 3. Direction = mean over an emotion's stories − cross-emotion mean − neutral
    dialogue principal components, per layer ([1], [5]).
-4. Strip = project the direction off the SVD span of the lens-mapped emotion
-   vocabulary, at every injected layer, **without renormalizing**.
+4. Delete the sayable part = project the direction off the span of the
+   lens-mapped emotion vocabulary, at every injected layer, **without
+   renormalizing**.
 5. Inject at every second layer of the middle band, scaled by each layer's own
    residual size. Controls: three random unit vectors, plus an uninjected
    baseline on every machine.
@@ -87,9 +93,9 @@ agreed to 0.00.
 ## Built on
 
 - [1] Anthropic, *Emotion vectors in large language models*, arXiv:2604.07729 — the extraction recipe and the arena design.
-- [2] Anthropic, *A reportable workspace in transformer language models*, arXiv:2607.15495 — the Jacobian lens and the dictionary we strip against.
+- [2] Anthropic, *A reportable workspace in transformer language models*, arXiv:2607.15495 — the Jacobian lens and the dictionary we delete against.
 - [3] [neuronpedia/jacobian-lens](https://huggingface.co/neuronpedia/jacobian-lens) — pre-fitted lenses for the Qwen3 ladder.
-- [4] *Latent introspection in language models*, arXiv:2602.20031 — motivates the 8B/32B pair.
+- [4] *Latent introspection in language models*, arXiv:2602.20031 — motivates using a 32B model.
 - [5] [EmoVecLLM](https://github.com/drgzkr/EmoVecLLM) — open replication of the extraction pipeline; our patches are in [`prompts/emovecllm_patches.diff`](prompts/emovecllm_patches.diff) (clone upstream and apply, we do not redistribute it).
 
 ## Reuse

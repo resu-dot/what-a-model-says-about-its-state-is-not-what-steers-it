@@ -14,3 +14,7 @@ data/
 
 # scratch run outputs; the published ones live in confirm_8b/ and confirm_32b/
 harness/runs/
+
+# superseded first pilot (pre topic-matched dataset)
+results_8b/
+results_8b_v2/
