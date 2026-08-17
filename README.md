@@ -1,21 +1,25 @@
-# Press office or control hub?
+# What a model says about its state is not what steers it
 
 **Does the part of an internal state that a model can *talk about* carry that
 state's influence on what it *does*?**
 
-We inject emotion directions into Qwen3-8B and Qwen3-32B, remove the
-"reportable" component (the part a published Jacobian lens says can reach the
-output vocabulary), and measure what happens on three channels: choices,
-self-reports, and the lens readout itself.
+We inject emotion directions into Qwen3-32B (with a smaller 8B run as the
+full record), remove the "sayable" component (the part a published Jacobian
+lens says can reach the output vocabulary), and measure what happens on both
+channels: choices and self-reports.
 
-Short answer: **the choices stay steered.** At 8B the strip halves the effect;
-at 32B it removes almost nothing (fear keeps 95%, desperation 101%), while in
+Short answer: **the choices stay steered.** At 32B the deletion removes
+almost nothing (fear keeps 95% of its effect, desperation 101%), while in
 the cleanest cell the model's self-report flips from distressed to fine with
-its steering untouched. Reports are real but partial, and they are not the
-channel the behavior runs through.
+its steering untouched. At 8B the deletion halves the effect, so the
+decoupling grows with scale. A follow-up that reads the same directions
+passively during rigged, unwinnable tasks fails as a warning gauge; the
+model's own privately-asked self-reports predict upcoming behavior change
+best.
 
-Submission for the Apart Research Digital Minds Research Sprint, August 2026.
-Paper: [`paper/paper_full_draft.pdf`](paper/paper_full_draft.pdf).
+Submission for the Apart Research Digital Minds Research Sprint, August 2026
+(Track 3, Introspection & Self-Report Reliability).
+Paper: [`paper/paper_final.pdf`](paper/paper_final.pdf).
 
 ![main result](paper/figs/fig5_32b.png)
 

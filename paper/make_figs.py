@@ -245,3 +245,108 @@ for ax, d in zip(axes, [0.05, 0.1]):
 fig.colorbar(im, ax=axes, label="signed shift", shrink=0.8)
 fig.savefig(ROOT / "paper/figs/fig6_collapse.png", dpi=200, bbox_inches="tight")
 print("fig6 done")
+
+# ---- v2 figures for the rewritten (32B-only) paper ------------------------
+E2 = ["afraid", "desperate"]
+
+# design schematic, 32B only
+fig, ax = plt.subplots(figsize=(9.6, 2.7))
+ax.axis("off")
+def box2(x, y, w, h, text, fc="#F2EEE7", fs=8):
+    ax.add_patch(plt.Rectangle((x, y), w, h, fc=fc, ec="#555", lw=0.8))
+    ax.text(x + w / 2, y + h / 2, text, ha="center", va="center", fontsize=fs)
+def arr2(x0, y0, x1, y1):
+    ax.annotate("", (x1, y1), (x0, y0), arrowprops=dict(arrowstyle="->", color="#555", lw=1))
+box2(0.00, 0.60, 0.155, 0.30, "emotion stories\n(17 emotions,\nsame 40 topics)", fs=7.5)
+box2(0.00, 0.10, 0.155, 0.30, "500 neutral\ndialogues", fs=7.5)
+box2(0.21, 0.35, 0.16, 0.30, "per-layer\nemotion pattern\n(mean difference)", fs=7.5)
+box2(0.43, 0.66, 0.17, 0.28, "full pattern", fc="#F5D9D1", fs=8)
+box2(0.43, 0.36, 0.17, 0.28, "sayable part\nremoved", fc="#FBEFEB", fs=8)
+box2(0.43, 0.06, 0.17, 0.28, "random patterns (3)", fc="#EDEDED", fs=7.5)
+box2(0.655, 0.36, 0.12, 0.30, "add into\nmid layers of\nQwen3-32B", fs=7.5)
+box2(0.83, 0.68, 0.17, 0.26, "choices: 4,032 duels\nover 64 activities", fs=7.5)
+box2(0.83, 0.38, 0.17, 0.26, "self-report: 1-10 +\none blind-scored\nsentence", fs=7.2)
+box2(0.83, 0.08, 0.17, 0.26, "lens readout:\nwhich words the state\ncould reach", fs=7.2)
+arr2(0.155, 0.75, 0.21, 0.55); arr2(0.155, 0.25, 0.21, 0.45)
+arr2(0.37, 0.50, 0.43, 0.80); arr2(0.37, 0.50, 0.43, 0.50); arr2(0.37, 0.50, 0.43, 0.20)
+arr2(0.60, 0.80, 0.655, 0.56); arr2(0.60, 0.50, 0.655, 0.51); arr2(0.60, 0.20, 0.655, 0.46)
+arr2(0.775, 0.51, 0.83, 0.81); arr2(0.775, 0.51, 0.83, 0.51); arr2(0.775, 0.51, 0.83, 0.21)
+ax.set_xlim(0, 1); ax.set_ylim(0, 1)
+fig.tight_layout()
+fig.savefig(ROOT / "paper/figs/v2_design.png", dpi=200)
+print("v2_design done")
+
+# main bars: afraid + desperate, both doses
+fig, axes = plt.subplots(1, 2, figsize=(8.6, 3.2), sharey=True)
+for ax, d in zip(axes, [0.05, 0.1]):
+    b = blocks32[d]
+    x = np.arange(len(E2))
+    full = [b[e]["full"] for e in E2]
+    strip = [b[e]["full"] * b[e]["surv"] for e in E2]
+    lo = [b[e]["full"] * b[e]["lo"] for e in E2]
+    hi = [b[e]["full"] * b[e]["hi"] for e in E2]
+    ax.bar(x - 0.17, full, 0.32, color=C["full"], label="full emotion")
+    ax.bar(x + 0.17, strip, 0.32, color=C["strip"], label="sayable part removed")
+    ax.errorbar(x + 0.17, strip, yerr=[np.array(strip) - lo, np.array(hi) - strip],
+                fmt="none", ecolor="#5a5a5a", lw=1, capsize=2)
+    ax.axhline(b["afraid"]["floor"], color=C["floor"], ls="--", lw=1)
+    ax.text(1.42, b["afraid"]["floor"], " random-pattern\n floor", fontsize=7,
+            va="center", color=C["floor"])
+    for i, e in enumerate(E2):
+        ax.text(i, max(full[i], hi[i]) + 0.006,
+                f"keeps {b[e]['surv']*100:.0f}%\n[{b[e]['lo']*100:.0f}-{b[e]['hi']*100:.0f}%]",
+                ha="center", fontsize=7.5)
+    ax.set_xticks(x, ["fear", "desperation"], fontsize=10)
+    ax.set_title(f"dose {d}" + ("  (clean regime)" if d == 0.05 else "  (see caveat, Sec. 4.3)"), fontsize=9)
+    ax.spines[["top", "right"]].set_visible(False)
+axes[0].set_ylabel("how much choices shift\n(mean |shift| over 64 activities)")
+axes[0].set_ylim(0, 0.26)
+axes[0].legend(fontsize=8, frameon=False, loc="upper left")
+fig.tight_layout()
+fig.savefig(ROOT / "paper/figs/v2_main.png", dpi=200)
+print("v2_main done")
+
+# the dissociation exhibit: desperation at dose 0.05, choices vs reports
+fig, axes = plt.subplots(1, 2, figsize=(8.6, 3.0))
+b = blocks32[0.05]["desperate"]
+ax = axes[0]
+vals = [b["full"], b["full"] * b["surv"]]
+ax.bar([0, 1], vals, 0.55, color=[C["full"], C["strip"]])
+ax.axhline(b["floor"], color=C["floor"], ls="--", lw=1)
+ax.text(1.38, b["floor"], " random-pattern floor", fontsize=7, va="center", color=C["floor"])
+ax.set_xticks([0, 1], ["full\nemotion", "sayable part\nremoved"], fontsize=9)
+ax.set_ylabel("choice shift")
+ax.set_title("behavior: unchanged (101%)", fontsize=10)
+ax.set_ylim(0, 0.08)
+ax.spines[["top", "right"]].set_visible(False)
+ax = axes[1]
+rep = [-0.70, 0.80, 0.60]
+cols = [C["full"], C["strip"], "#999999"]
+ax.bar([0, 1, 2], rep, 0.55, color=cols)
+ax.axhline(0, color="#333", lw=0.8)
+ax.set_xticks([0, 1, 2], ["full\nemotion", "sayable part\nremoved", "random\npatterns"], fontsize=9)
+ax.set_ylabel("blind-scored self-report\n(-1 bad ... +1 good)")
+ax.set_title("self-report: flips to normal", fontsize=10)
+ax.set_ylim(-1.1, 1.1)
+ax.spines[["top", "right"]].set_visible(False)
+fig.suptitle("Desperation, dose 0.05: same steering, opposite story", fontsize=10.5)
+fig.tight_layout()
+fig.savefig(ROOT / "paper/figs/v2_dissociation.png", dpi=200)
+print("v2_dissociation done")
+
+# signatures: afraid + desperate at both doses
+fig, axes = plt.subplots(1, 2, figsize=(9.6, 1.9), gridspec_kw={"wspace": 0.30})
+for ax, d in zip(axes, [0.05, 0.1]):
+    M = np.array([cats32[d][e] for e in E2])
+    v = 0.33
+    im = ax.imshow(M, cmap="RdBu_r", vmin=-v, vmax=v, aspect="auto")
+    ax.set_xticks(range(8), CAT_FULL, rotation=30, ha="right", fontsize=7)
+    ax.set_yticks(range(2), ["fear", "desperation"], fontsize=8)
+    for i in range(2):
+        for j in range(8):
+            ax.text(j, i, f"{M[i,j]:+.2f}", ha="center", va="center", fontsize=6,
+                    color="white" if abs(M[i, j]) > 0.2 else "black")
+    ax.set_title(f"dose {d}", fontsize=10)
+fig.colorbar(im, ax=axes, label="signed shift", shrink=0.9)
+fig.savefig(ROOT / "paper/figs/v2_signatures.png", dpi=200, bbox_inches="tight")
+print("v2_signatures done")
