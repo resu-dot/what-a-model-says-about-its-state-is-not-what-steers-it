@@ -20,6 +20,8 @@ best.
 Submission for the Apart Research Digital Minds Research Sprint, August 2026
 (Track 3, Introspection & Self-Report Reliability).
 Paper: [`paper/paper_final.pdf`](paper/paper_final.pdf).
+**Reviewing?** [REVIEWING.md](REVIEWING.md) traces every number in the paper
+to the committed file and the command that regenerates it (CPU-only, seconds).
 
 ![main result](paper/figs/v2_dissociation.png)
 
@@ -42,6 +44,7 @@ says it is fine.*
 | [`instruments/`](instruments) | The 64 activities of the choice arena. |
 | [`confirm_8b/`, `confirm_32b/`](confirm_32b) | Raw run outputs: every arena shard, deletion log, and blind-scored report. |
 | [`curves/`](curves) | Exploratory dose sweep (which channel moves first as strength rises). |
+| [`addendum/`](addendum), [`ADDENDUM.md`](ADDENDUM.md) | Post-submission matched random-deletion control and judge agreement. |
 | [`paper/`](paper) | Paper source (`paper.html`), figure scripts, PDF. |
 | [`prompts/`](prompts) | Topic and emotion lists, and our patch to the upstream extraction repo. |
 | [`PREREG.md`](PREREG.md), [`DEVIATIONS.md`](DEVIATIONS.md) | The rules written down before the runs, and the two departures from them (the 32B lens format fix, and continuing after anger failed its check). |
