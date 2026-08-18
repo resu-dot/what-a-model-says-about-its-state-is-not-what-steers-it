@@ -50,6 +50,14 @@ Not here: the pre-fitted Jacobian lenses (1.1 GB and 6.6 GB — download from
 [neuronpedia/jacobian-lens](https://huggingface.co/neuronpedia/jacobian-lens)),
 model weights, and intermediate activation files.
 
+## Post-submission addendum
+
+After submission, an external critique flagged a missing control. We ran it:
+matched random deletions (same size, same angle, random direction) measurably
+dent the steering (survival 0.84-0.89) while the sayable deletion does not
+(0.96-1.01), confirming the paper's claim. Also added: two-judge agreement
+for the blind scorer (kappa 0.84). Full write-up: [ADDENDUM.md](ADDENDUM.md).
+
 ## Reproducing
 
 **The analysis, no GPU needed.** Every number and figure in the paper is

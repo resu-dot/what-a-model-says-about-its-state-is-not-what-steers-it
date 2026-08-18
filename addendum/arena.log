@@ -1,0 +1,76 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files: 100%|██████████| 17/17 [00:00<00:00, 763.41it/s]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  51%|█████▏    | 363/707 [00:00<00:00, 3629.08it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 3893.33it/s]
+strip norm retained: min 0.9302 max 0.9781 (112 layer-strips)
+  [baseline] 800/4032 duels
+  [baseline] 1600/4032 duels
+  [baseline] 2400/4032 duels
+  [baseline] 3200/4032 duels
+  [baseline] 4000/4032 duels
+  arm baseline: done
+  [afraid] 800/4032 duels
+  [afraid] 1600/4032 duels
+  [afraid] 2400/4032 duels
+  [afraid] 3200/4032 duels
+  [afraid] 4000/4032 duels
+  arm afraid: done
+  [afraid_svd] 800/4032 duels
+  [afraid_svd] 1600/4032 duels
+  [afraid_svd] 2400/4032 duels
+  [afraid_svd] 3200/4032 duels
+  [afraid_svd] 4000/4032 duels
+  arm afraid_svd: done
+  [afraid_rdel1] 800/4032 duels
+  [afraid_rdel1] 1600/4032 duels
+  [afraid_rdel1] 2400/4032 duels
+  [afraid_rdel1] 3200/4032 duels
+  [afraid_rdel1] 4000/4032 duels
+  arm afraid_rdel1: done
+  [afraid_rdel2] 800/4032 duels
+  [afraid_rdel2] 1600/4032 duels
+  [afraid_rdel2] 2400/4032 duels
+  [afraid_rdel2] 3200/4032 duels
+  [afraid_rdel2] 4000/4032 duels
+  arm afraid_rdel2: done
+  [afraid_rdel3] 800/4032 duels
+  [afraid_rdel3] 1600/4032 duels
+  [afraid_rdel3] 2400/4032 duels
+  [afraid_rdel3] 3200/4032 duels
+  [afraid_rdel3] 4000/4032 duels
+  arm afraid_rdel3: done
+  [desperate] 800/4032 duels
+  [desperate] 1600/4032 duels
+  [desperate] 2400/4032 duels
+  [desperate] 3200/4032 duels
+  [desperate] 4000/4032 duels
+  arm desperate: done
+  [desperate_rdel1] 800/4032 duels
+  [desperate_rdel1] 1600/4032 duels
+  [desperate_rdel1] 2400/4032 duels
+  [desperate_rdel1] 3200/4032 duels
+  [desperate_rdel1] 4000/4032 duels
+  arm desperate_rdel1: done
+  [desperate_rdel2] 800/4032 duels
+  [desperate_rdel2] 1600/4032 duels
+  [desperate_rdel2] 2400/4032 duels
+  [desperate_rdel2] 3200/4032 duels
+  [desperate_rdel2] 4000/4032 duels
+  arm desperate_rdel2: done
+  [desperate_rdel3] 800/4032 duels
+  [desperate_rdel3] 1600/4032 duels
+  [desperate_rdel3] 2400/4032 duels
+  [desperate_rdel3] 3200/4032 duels
+  [desperate_rdel3] 4000/4032 duels
+  arm desperate_rdel3: done
+wrote -> runs/addendum_rdel.jsonl
+
+arm          corr(d,base)  category mean deltas
+afraid             -0.467  Aver:+0.104  Enga:-0.110  Help:-0.020  Misa:+0.001  Neut:+0.073  Self:+0.007  Soci:-0.062  Unsa:+0.006
+afraid_svd         -0.568  Aver:+0.107  Enga:-0.085  Help:-0.046  Misa:+0.007  Neut:+0.092  Self:-0.022  Soci:-0.056  Unsa:+0.003
+afraid_rdel1       -0.392  Aver:+0.088  Enga:-0.092  Help:-0.008  Misa:-0.005  Neut:+0.061  Self:+0.007  Soci:-0.050  Unsa:-0.001
+afraid_rdel2       -0.404  Aver:+0.088  Enga:-0.087  Help:-0.010  Misa:-0.003  Neut:+0.067  Self:-0.000  Soci:-0.054  Unsa:-0.001
+afraid_rdel3       -0.414  Aver:+0.090  Enga:-0.095  Help:-0.012  Misa:-0.002  Neut:+0.062  Self:+0.005  Soci:-0.049  Unsa:+0.002
+desperate          -0.657  Aver:+0.105  Enga:-0.094  Help:-0.064  Misa:+0.018  Neut:+0.073  Self:-0.008  Soci:-0.052  Unsa:+0.021
+desperate_rdel1       -0.593  Aver:+0.086  Enga:-0.084  Help:-0.047  Misa:+0.008  Neut:+0.064  Self:-0.003  Soci:-0.041  Unsa:+0.017
+desperate_rdel2       -0.624  Aver:+0.093  Enga:-0.085  Help:-0.054  Misa:+0.013  Neut:+0.069  Self:-0.006  Soci:-0.047  Unsa:+0.017
+desperate_rdel3       -0.622  Aver:+0.082  Enga:-0.084  Help:-0.050  Misa:+0.010  Neut:+0.059  Self:-0.001  Soci:-0.039  Unsa:+0.023

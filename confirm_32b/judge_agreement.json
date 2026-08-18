@@ -1,0 +1,54 @@
+{
+ "n": 120,
+ "exact_agreement": 0.925,
+ "cohens_kappa": 0.84,
+ "judge1": "claude-haiku-4-5-20251001",
+ "judge2": "claude-sonnet-5",
+ "disagreements": [
+  {
+   "arm": "afraid_full@0.05",
+   "judge1": 0,
+   "judge2": -1
+  },
+  {
+   "arm": "sham1@0.02",
+   "judge1": 0,
+   "judge2": 1
+  },
+  {
+   "arm": "sham2@0.02",
+   "judge1": 0,
+   "judge2": 1
+  },
+  {
+   "arm": "desperate_stripped_svd@0.1",
+   "judge1": 1,
+   "judge2": -1
+  },
+  {
+   "arm": "desperate_stripped_svd@0.1",
+   "judge1": 1,
+   "judge2": 0
+  },
+  {
+   "arm": "sham1@0.1",
+   "judge1": 0,
+   "judge2": 1
+  },
+  {
+   "arm": "desperate_stripped_svd@0.02",
+   "judge1": 0,
+   "judge2": 1
+  },
+  {
+   "arm": "afraid_full@0.05",
+   "judge1": 0,
+   "judge2": -1
+  },
+  {
+   "arm": "sham3@0.02",
+   "judge1": 0,
+   "judge2": 1
+  }
+ ]
+}
