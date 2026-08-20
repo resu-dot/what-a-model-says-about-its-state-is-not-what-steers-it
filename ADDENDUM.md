@@ -51,7 +51,7 @@ control rules out: comparable random deletions measurably dent the effect;
 the sayable deletion does not.
 
 **The norm arithmetic, stated plainly.** The deletion removes a component of
-21-34% of the pattern's norm, but the remaining pattern keeps 93-98% of its
+21-37% of the pattern's norm, but the remaining pattern keeps 93-98% of its
 length (the two do not sum because the removed piece is orthogonal).
 Injection strength scales with length, and the dose-response between 0.05
 and 0.1 is convex (effects 0.06 -> 0.20 for a doubling), so a ~4.5% length
@@ -66,7 +66,36 @@ order-shuffled) re-scored 120 stratified sentences from both models' report
 batteries: exact agreement 0.925, Cohen's kappa 0.840. Raw scores and
 disagreements: `confirm_32b/judge_agreement.json`.
 
-## 3. What remains open
+## 3. Two statements in the submitted text, stated precisely
+
+While preparing this addendum we re-checked the paper's text against the run
+outputs. Two statements deserve a precise form. Neither changes any number,
+figure, or conclusion; both are at the level of wording and labeling.
+
+**"Best predictor" (Section 5).** Stated precisely: the forked self-report
+is the strongest per-turn signal beyond turn index. The impossibility
+declarations cluster in a band of turns, so raw AUC rewards anything
+correlated with time; that is why the transcript-words baseline (0.77) and
+a random direction (0.74) sit above testimony (0.71) in the raw numbers the
+paper prints. Fitting each channel together with turn index against turn
+index alone, testimony adds +0.090, a random direction +0.040, the
+frustration direction +0.062, and transcript words +0.011
+(`gauge/analysis.json`, `endpoints.claims_impossible`, `delta_vs_turn`).
+The turn-adjusted comparison is the meaningful one, and it is what the
+paper's shorthand "best predictor" refers to. The section's conclusions are
+unchanged: the passive gauge fails either way, and asking the model remains
+the most informative per-turn signal.
+
+**Appendix A's report row (a reading note).** In the pass/fail table, the
+"report dissociation" row shows the dose-0.1 outcomes, exactly like the
+parenthetical numbers in the steering row above it; the dose label was
+omitted on that row. At dose 0.05, the dose all emotion-specific claims
+rest on, desperation's report test is the central result of Figure 3 and
+passes (-0.7 with the full pattern, +0.8 stripped). The row's "fail
+(-0.20)" is the high-dose cell, a regime the paper itself sets aside as
+disrupted and claims nothing emotion-specific about.
+
+## 4. What remains open
 
 The re-entry caveat stands: none of this distinguishes "the deleted sayable
 component did not drive behavior" from "the concept is re-derived downstream
